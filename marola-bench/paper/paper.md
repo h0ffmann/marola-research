@@ -42,7 +42,7 @@ style: research
 
 ## Hard rules
 
-> These five are the owner's rules (Hoffmann, 13 October 2026). They are not proposals, and they
+> These six are the owner's rules (Hoffmann, 13 October 2026). They are not proposals, and they
 > are not open to an agent's choice. Work on marola-bench that breaks one is wrong, even when it
 > works.
 >
@@ -53,8 +53,11 @@ style: research
 > 4. **marola-bench lives in `marola-research/marola-bench`.** The first rendered paper is there.
 > 5. **The deployment of the Pekko cluster is cheap, and it is reliable.** Both are hard
 >    requirements, and so is its infrastructure on GCP.
+> 6. **marola-bench is all rights reserved, and its credit is the author's.** It is not shared
+>    outside the organisations marola-dev and ouroboric-dev without his acknowledgement. Whoever
+>    uses it, a person or an agent, cites it.
 
-What each rule meets today, read on 13 October 2026. Four of the five change the accepted
+What each rule meets today, read on 13 October 2026. Five of the six change the accepted
 design, MIP-0091. By marola's own rule, a change like that is written in a MIP first. Until
 MIP-0091 is amended or a new MIP is accepted, this paper states the rules and the MIP states the
 older design. The rules are the owner's later word, so the rules win; the list below is what the
@@ -112,6 +115,19 @@ next MIP must settle.
   the means: a cluster that runs all the time, on a cloud that is paid.
 - No price has been computed, so "cheap" has no number yet **⚠**. Section 4.4 says how the
   design makes the cluster cheap and reliable; the number is fixed before anything is deployed.
+
+**Rule 6: all rights reserved.**
+
+- The accepted design asks for a public chain: scorecards under CC BY 4.0 and a dated data set
+  for each version of the protocol **(MIP R20)**. Section 7 of this paper argues the same from
+  the author's own book.
+- Rule 6 is about something else and something that exists: this paper, its notes, its journal
+  and its website. They can be read and cited; they cannot be copied or shared without the
+  author's acknowledgement. The rule says nothing yet about scores, because there are none.
+- The two meet when the first scorecard exists. Whether it is published under CC BY 4.0, as the
+  design says, or under these terms, is for the MIP and for the owner.
+- What rule 6 does not undo: this text was under CC BY 4.0 until 13 October 2026, and a copy
+  taken then keeps that licence.
 
 ## 1. Summary
 
@@ -364,6 +380,10 @@ every feature of it is dated before the forecast was issued **(MIP R9)**.
 
 ## 7. Why this is open
 
+> Read this section as the design's argument, not as this paper's licence. The benchmark's
+> method and, by the accepted design, its scorecards are public. This paper is all rights
+> reserved (hard rule 6): it is open to read and to cite, and not to copy.
+
 *Closed Source: The God that Failed* argues that a result nobody can check is a result nobody
 should trust [@hoffmann2026closedsource]. A benchmark is that argument at a small size: a
 scoreboard with a hidden scorer asks for trust. So the design has a public chain **(MIP R20)**:
@@ -413,8 +433,9 @@ From this paper:
   nodes, the budget in money, and how the actors and the four-hour cycle of today meet.
 - **The name.** The design calls the benchmark "marola-eval" **(MIP §11)**. The owner asked for
   this paper under the name "marola-bench". Which one the public sees is his decision.
-- **The licence of this text.** This repository is MIT. The design wants CC BY 4.0 for what it
-  publishes **(MIP R20)**. That is the owner's decision too.
+- **The licence of the scorecards.** This text is all rights reserved (hard rule 6). The design
+  wants CC BY 4.0 for what the benchmark publishes **(MIP R20)**. Which of the two the first
+  scorecard gets is the owner's decision.
 - **How deep the reading was.** Each "(v)" was checked against a passage of its source, but for
   six of the journal papers that passage is the abstract, and for one (the buoys) the abstract
   on a university's record, because the publisher's page asked for a login. `REFERENCES.md`

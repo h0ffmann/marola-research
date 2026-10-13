@@ -2,9 +2,10 @@ version = 1
 
 # Licence and copyright for every file, in one place, with no header in any file: the pattern of
 # the ouroboric-dev repositories (ouroboric-dev/ouroboric's REUSE.toml at b355b1d), which
-# marola-dev/marola and h0ffmann/closed-source follow too. Texts are CC BY 4.0; code is MIT, the
-# licence this repository started with (LICENSE). When several blocks match a file, the closest
-# one wins. Check with `just reuse` (`reuse lint`).
+# marola-dev/marola and h0ffmann/closed-source follow too. At the root, texts are CC BY 4.0 and
+# code is MIT, the licence this repository started with (LICENSE). A research says its own
+# terms: marola-bench is all rights reserved (the last block; REUSE.md says it in prose).
+# When several blocks match a file, the last one wins. Check with `just reuse` (`reuse lint`).
 
 # Texts: the papers, their notes and journals, the pages that explain the repository.
 [[annotations]]
@@ -20,6 +21,15 @@ precedence = "closest"
 SPDX-FileCopyrightText = ["2026 Matheus Hoffmann", "2026 marola.dev"]
 SPDX-License-Identifier = "MIT"
 
-# A rendered paper shows the logos of marola and of Ouroboric on its first page. The text of the
-# PDF is CC BY 4.0. The logos in it are trademarks of their projects and are not licensed here;
-# their files are never committed (<research>/paper/logos.tsv, scripts/logos.sh).
+# marola-bench: all rights reserved, and the credit is the author's alone (the owner, 13 October
+# 2026). It covers everything under the directory: the paper and its PDF, the references, the
+# notes, the journal and the website, code included. It is the last block, so it wins.
+[[annotations]]
+path = ["marola-bench/**"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Matheus Hoffmann"
+SPDX-License-Identifier = "LicenseRef-Hoffmann-All-Rights-Reserved"
+
+# A rendered paper shows the logos of marola and of Ouroboric on its first page. The logos in it
+# are trademarks of their projects and are not licensed here (TRADEMARKS.md); their files are
+# never committed (<research>/paper/logos.tsv, scripts/logos.sh).

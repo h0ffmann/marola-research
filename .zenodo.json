@@ -1,0 +1,84 @@
+{
+  "title": "marola-bench: a proposal for a WeatherBench for Brazil",
+  "upload_type": "publication",
+  "publication_type": "proposal",
+  "description": "<p><strong>All rights reserved.</strong> The paper can be read at <a href=\"https://marola-dev.github.io/marola-research/marola-bench/\">https://marola-dev.github.io/marola-research/marola-bench/</a>. It may be read and cited; it may not be copied or shared without the written acknowledgement of the author (<a href=\"https://github.com/marola-dev/marola-research/blob/main/REUSE.md\">REUSE.md</a>). Whoever uses it, a person or an agent, cites it by this DOI.</p><p>Public weather benchmarks made forecast models comparable, but for a person on a Brazilian beach three things are missing in them: a region that is Brazil, a score for ocean waves, and an instrument as the truth. This paper proposes marola-bench, which keeps the method of WeatherBench, WeatherBench 2 and Operational WeatherBench and changes those three things. The bench is defined as the set of score series: the scores of any forecaster against the observations of a point, in order of time. Observation points are added by hand, and one actor for each point asks the forecasters and registers the scores. The paper states five hard rules of the owner for the implementation (Apache Pekko and Scala 3, GCP, Besom, a cheap and reliable cluster) and says where they change the accepted design, MIP-0091. It reports no result: no forecast has been scored, and nothing has been built.</p><p>The design it gives an account of is MIP-0091 of marola (<a href=\"https://github.com/marola-dev/marola\">marola-dev/marola</a>). The paper is made in the Ouroboric way, whose ideas are Bruno Valério's: every claim carries a mark that says how it was checked, and a log quotes the passage of each reference that was read.</p>",
+  "creators": [
+    {
+      "name": "Hoffmann, Matheus",
+      "affiliation": "Escola Politécnica, Universidade Federal do Rio de Janeiro",
+      "orcid": "0009-0009-1056-7661"
+    }
+  ],
+  "access_right": "closed",
+  "license": "other-closed",
+  "language": "eng",
+  "keywords": [
+    "weather forecast verification",
+    "wave forecasting",
+    "benchmark",
+    "WeatherBench",
+    "ocean waves",
+    "buoy observations",
+    "Brazil",
+    "South Atlantic",
+    "forecast evaluation",
+    "actor model",
+    "Apache Pekko",
+    "reactive systems",
+    "research proposal"
+  ],
+  "notes": "Copyright (c) 2026 Matheus Hoffmann. All rights reserved. Not peer reviewed. No score has been computed.",
+  "related_identifiers": [
+    {
+      "identifier": "https://marola-dev.github.io/marola-research/marola-bench/paper.pdf",
+      "relation": "isVariantFormOf",
+      "scheme": "url",
+      "resource_type": "publication-proposal"
+    },
+    {
+      "identifier": "https://github.com/marola-dev/marola-research",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    },
+    {
+      "identifier": "10.5281/zenodo.23224155",
+      "relation": "cites",
+      "scheme": "doi",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "10.5281/zenodo.23221351",
+      "relation": "cites",
+      "scheme": "doi",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "10.5281/zenodo.23311208",
+      "relation": "cites",
+      "scheme": "doi",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "10.5281/zenodo.23333656",
+      "relation": "cites",
+      "scheme": "doi",
+      "resource_type": "publication-book"
+    },
+    {
+      "identifier": "10.1029/2020MS002203",
+      "relation": "cites",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "10.1029/2023MS004019",
+      "relation": "cites",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "https://github.com/ouroboric-dev/ouroboric",
+      "relation": "cites",
+      "scheme": "url"
+    }
+  ]
+}
