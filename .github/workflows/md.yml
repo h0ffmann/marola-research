@@ -1,0 +1,24 @@
+# .md — the quality of the Markdown files of every research, with three analysers from the
+# flake's `md` shell (`just md-quality`): markdownlint-cli2 for the structure, Vale for the prose
+# rules of the ouro-paper skill, lychee for links to files and headings that do not exist. No
+# network here: web links are the `live links` workflow's. Each analyser is first given a bad
+# file and must refuse it.
+name: .md
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+      - run: nix develop --no-update-lock-file .#md --command scripts/md-quality.sh --self-test
+      - run: nix develop --no-update-lock-file .#md --command scripts/md-quality.sh

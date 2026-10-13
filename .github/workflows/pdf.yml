@@ -1,0 +1,52 @@
+# pdf — for each research, on each pull request and each push to main: every reference has its
+# row in the log, the paper builds with the pinned toolchain (picasso's paper lab, through
+# flake.nix) with pandoc warnings as errors, and the committed PDF is the one its text makes.
+# One job for each research: the list comes from `just researches`, so a new research needs no
+# change here. The PDFs are kept as an artifact.
+name: pdf
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  researches:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      list: ${{ steps.list.outputs.list }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: list
+        run: |
+          list="$(for f in */paper/paper.md; do [ -f "$f" ] && printf '"%s",' "${f%%/*}"; done)"
+          [ -n "$list" ] || { echo "no research has a paper/paper.md" >&2; exit 1; }
+          echo "list=[${list%,}]" >> "$GITHUB_OUTPUT"
+
+  build:
+    needs: researches
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        research: ${{ fromJson(needs.researches.outputs.list) }}
+    name: build (${{ matrix.research }})
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+      - name: the lock is current
+        run: nix flake metadata --no-update-lock-file >/dev/null
+      - name: every reference has its row
+        run: nix develop --no-update-lock-file --command just refs ${{ matrix.research }}
+      - name: the committed PDF is the one its text makes
+        run: nix develop --no-update-lock-file --command just _current ${{ matrix.research }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: paper-${{ matrix.research }}
+          path: build/${{ matrix.research }}/${{ matrix.research }}.pdf
+          if-no-files-found: error
