@@ -56,9 +56,18 @@ The members of marola-dev and ouroboric-dev may work on it, inside those organis
 ## Cite
 
 > Hoffmann, M. (2026). *marola-bench: a proposal for a WeatherBench for Brazil*. Zenodo.
+> <https://doi.org/10.5281/zenodo.23352633>
 
-No DOI yet: the first release has not been cut. The DOI is written here by the pull request that
-follows the release.
+| | DOI |
+|---|---|
+| the work, always its latest version | [10.5281/zenodo.23352633](https://doi.org/10.5281/zenodo.23352633) |
+| v0.1.0, 13 October 2026 | [10.5281/zenodo.23352634](https://doi.org/10.5281/zenodo.23352634) |
+
+Cite the first one, unless you mean the exact text of one version.
+
+The release was cut from the author's fork, `h0ffmann/marola-research`, at the commit of this
+repository's pull request 4: Zenodo's switch is on for his account, not for the organisation.
+The next version is released from that fork too, or it starts a second record.
 
 ## Files
 
