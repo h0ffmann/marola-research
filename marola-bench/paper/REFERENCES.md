@@ -33,13 +33,24 @@ Date of record: 13 October 2026.
 | `marola2026` | [10.5281/zenodo.23224155](https://doi.org/10.5281/zenodo.23224155) | DataCite record read: six creators and title | the author's work with five other people | verified |
 | `hoffmann2026picasso` | [10.5281/zenodo.23311208](https://doi.org/10.5281/zenodo.23311208) | DataCite record read: creator and title | the author's own work | verified |
 | `hoffmann2026closedsource` | [10.5281/zenodo.23333656](https://doi.org/10.5281/zenodo.23333656) | Zenodo record read: v0.3.0, type Book | the author's own work | verified |
+| `pekko` | <https://github.com/apache/pekko> | GitHub's record of the repository read: its description and its licence, Apache-2.0 | what Pekko is, in its own words | verified |
+| `besom` | <https://github.com/VirtusLab/besom> | GitHub's record and the repository's README read: "Besom Scala SDK for Pulumi", "Scala support is currently in Public Beta", licence Apache-2.0, latest release v0.5.2 of 18 September 2026 | what Besom is, that it is a beta, its latest release | verified |
+| `pulumi` | <https://github.com/pulumi/pulumi> | GitHub's record read: "Infrastructure as Code in any programming language", Apache-2.0 | what Pulumi is | verified |
+| `speckit` | <https://github.com/github/spec-kit> | GitHub's record read: "Toolkit to help you get started with SDD or any other process!", MIT | that a toolkit for SDD with this name exists. Not checked: that MIP-0091's field "Spec-kit" means this one | verified |
+| `reactivemanifesto` | <https://www.reactivemanifesto.org/> | the page was fetched and read: the four properties and the sentence quoted for each | the four properties, in its words | verified. Its authors and its year (2014, version 2.0) are in the entry from memory, not from the page: not checked |
+| `pekkosharding` | [Pekko docs, Cluster Sharding](https://pekko.apache.org/docs/pekko/current/typed/cluster-sharding.html) | the page was fetched and read for "Passivation": "If the state of the entities are persistent you may stop entities that are not used to reduce memory consumption." | passivation, in its words | verified |
+| `pekkopersistence` | [Pekko docs, Event Sourcing](https://pekko.apache.org/docs/pekko/current/typed/persistence.html) | the page answered 200 and its title is "Event Sourcing"; its text was not read | that Pekko has event-sourced actors | page and title only |
+| `pekkofault` | [Pekko docs, Fault Tolerance](https://pekko.apache.org/docs/pekko/current/typed/fault-tolerance.html) | the page answered 200 and has a section "Supervision"; its text was not read | that Pekko has supervision | page and title only |
+| `pekkostreams` | [Pekko docs, Basics and working with Flows](https://pekko.apache.org/docs/pekko/current/stream/stream-flows-and-basics.html) | the page answered 200 and has a section "Back-pressure explained"; its text was not read | that Pekko Streams has back-pressure | page and title only |
+| `pekkosbr` | [Pekko docs, Split Brain Resolver](https://pekko.apache.org/docs/pekko/current/split-brain-resolver.html) | the page answered 200; its text was not read | that Pekko has a split brain resolver | page and title only |
+| `gcpspot` | [Compute Engine docs, Spot VMs](https://cloud.google.com/compute/docs/instances/spot) | the page was fetched and read for the sentence quoted | that Spot VMs are discounted and can be preempted at any time, in its words | verified |
 | `smith2016software` | [10.7717/peerj-cs.86](https://doi.org/10.7717/peerj-cs.86) | Crossref record read; the text is checked in h0ffmann/closed-source's own reference log | that software should be cited with a permanent identifier | verified, through that log |
 
 ## Checked in a repository, not a reference
 
 - `marola-dev/marola-app`, `build.sbt` at commit `f769245`, read through GitHub's API on 13
   October 2026: `scalaVersion := "3.9.0"`, `kyoVersion = "1.0.0-RC7"`, and no line that names
-  Pekko. This supports the two "(v)" marks under the hard rule.
+  Pekko. This supports the two "(v)" marks under hard rule 1.
 
 ## Looked for and not cited
 
@@ -51,9 +62,9 @@ Date of record: 13 October 2026.
   answered 403 to a fetch. It is not cited. The paper says "the national programme" where MIP-0091 says PNBOIA.
 - SiMCosta (<https://simcosta.furg.br/>) and INMET (<https://portal.inmet.gov.br/>) answered 200.
   Their pages were not read for what they measure or under which licence, so the paper does not
-  name them. They are candidates for the inventory in section 7 of the paper.
+  name them. They are candidates for the first inventory of open instruments.
 
 ## Before v1
 
-Read the text of each "record only" reference, and change its claim in the paper from
+Read the text of each "record only" and "page and title only" reference, and change its claim in the paper from
 "(v, title only)" to "(v)" with the section or page that supports it.

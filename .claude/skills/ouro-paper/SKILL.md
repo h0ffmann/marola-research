@@ -1,6 +1,6 @@
 ---
 name: ouro-paper
-description: "Write, check and release a citable research text the way marola's research is made: a paper, a proposal, a report or a note under papers/. Use when asked to write or draft a paper or proposal, add a section or a reference, check a paper before a pull request, prepare its release or DOI, or make its easy pt-BR version. Use it before any other writing skill in this repository."
+description: "Write, check and release a citable research text the way marola's research is made: a paper, a proposal or a report in a research directory (<research>/paper/). Use when asked to write or draft a paper or proposal, add a section or a reference, check a paper before a pull request, prepare its release or DOI, or make its easy pt-BR version. Use it before any other writing skill in this repository."
 ---
 
 # ouro-paper
@@ -9,7 +9,8 @@ Written for this repository. It combines the working rules of four of the owner'
 h0ffmann/closed-source, h0ffmann/ww3-gpu, h0ffmann/picasso and marola-dev/marola. No file or
 paragraph of theirs is copied; each rule names where it comes from, at a commit ("Sources").
 
-**Audience.** An agent that writes or changes a text under `papers/`. A person can read it as
+**Audience.** An agent that writes or changes a text in a research directory (`AGENTS.md` says
+what a research is). A person can read it as
 the list of what a paper here must pass.
 
 **Status: untested.** This skill has no evals yet. Nobody has measured that it triggers or that
@@ -72,10 +73,13 @@ The owner tags. An agent prepares the metadata and gives the owner the command.
 ## A paper's files
 
 ```text
-papers/<slug>/
-  paper.md        the text: front matter, then prose with a mark on each claim
-  refs.bib        every reference; a DOI where one exists
-  REFERENCES.md   one row for each entry of refs.bib: how it was checked, what the paper takes
+<research>/
+  README.md         what the research is, its hard rules, its status
+  <research>.pdf    the rendered paper (`just paper <research>`)
+  paper/
+    paper.md        the text: front matter, then prose with a mark on each claim
+    refs.bib        every reference; a DOI where one exists
+    REFERENCES.md   one row for each entry of refs.bib: how it was checked, what the paper takes
 ```
 
 `paper.md` starts with front matter: `title`, `author`, `status` (`draft` until the owner says
@@ -85,6 +89,11 @@ The first thing after the title is a block that says what the text is (a proposa
 result), what it is not, and how to read the marks.
 
 The last sections are always "What is not known" and "Where the thesis comes from".
+
+**Hard rules of a research.** When the owner gives a rule for a research ("it is implemented in
+X"), write it in the research's `README.md` and at the top of its paper, in his words and with
+the date. Then say, for each rule, what it meets today: what already agrees, and what in an
+accepted design it changes. Do not hide a conflict and do not resolve it; the next MIP does.
 
 ## Steps
 
@@ -100,7 +109,9 @@ The last sections are always "What is not known" and "Where the thesis comes fro
 6. **Write "What is not known"** from the `⚠` marks and from the design's own open questions.
 7. **Read it as a stranger.** For each sentence with a fact: can a reader find where it comes
    from in one step?
-8. **Open a pull request.** Work on a branch and stage files by path. In the body, say what was
+8. **Render it.** `just paper <research>` writes `<research>/<research>.pdf`. Read the PDF: a
+   citation that did not resolve shows as its key. Commit the PDF with the text it was made from.
+9. **Open a pull request.** Work on a branch and stage files by path. In the body, say what was
    checked, what was not, and each decision that is the owner's. Do not merge.
 
 ## Borrow, cite, propagate
@@ -135,8 +146,9 @@ first appears. Add no fact.
 
 ## What this skill does not do
 
-- It does not build a PDF. This repository has no build yet; `picasso`'s `paper` lab is the
-  pinned toolchain the other projects use for that.
+- It does not make a typeset journal paper. `just paper` renders a plain PDF with pandoc and
+  XeLaTeX from `picasso`'s `paper` lab, pinned in `flake.lock`. There is no template, no arXiv
+  bundle and no continuous check yet.
 - It does not check that a claim is true. It makes the writer say how it was checked.
 - It does not decide a thesis, a name, a licence or a release.
 

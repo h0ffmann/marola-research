@@ -1,0 +1,6 @@
+% Shared by every paper (justfile, `_paper`). The marks of the ouro-paper skill must print: the
+% text font has no warning sign, so that one character is taken from DejaVu Sans.
+% By file name, from the TeX tree of the pinned toolchain: a font of the machine is never used.
+\newfontfamily\markfont{DejaVuSans.ttf}
+\catcode`\⚠=\active
+\protected\def⚠{{\markfont\char"26A0\relax}}
