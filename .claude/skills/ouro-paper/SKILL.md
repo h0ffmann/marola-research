@@ -13,8 +13,12 @@ paragraph of theirs is copied; each rule names where it comes from, at a commit 
 what a research is). A person can read it as
 the list of what a paper here must pass.
 
-**Status: untested.** This skill has no evals yet. Nobody has measured that it triggers or that
-its output is better with it than without it.
+**Status: untested.** `evals/evals.json` has three cases, and nobody has run them: nobody has
+measured that this skill triggers, or that a paper is better with it than without it.
+
+Several steps came from other people's skills for paper quality. [`REA.md`](REA.md) names each
+one at a commit, with its licence, and says what was adopted and what was left. Nothing of theirs
+is copied.
 
 ## The loop
 
@@ -37,6 +41,8 @@ change one without the owner's word. If the task needs one that nobody gave, sto
 **Hard rule: never invent a reference.** Fetch a source before you cite it. Copy its title,
 authors, journal and year from the registry's record (Crossref, DataCite), not from memory. A
 source you could not fetch is not cited; it goes in the log under "Looked for and not cited".
+What does not count as reading a source: a search result's snippet, a summary, your memory, and
+the reference list of another paper.
 
 **Hard rule: every claim has a mark.**
 
@@ -48,6 +54,12 @@ source you could not fetch is not cited; it goes in the log under "Looked for an
 
 Never remove a `⚠` without doing the check. Never turn a plan or a projection into a
 measurement.
+
+A mark belongs to the words it was made for. When you reword a claim, the mark is gone until the
+check is done again for the new words. A mark from an earlier session is a note of where to
+look, not a check.
+
+"The source does not say" is not "it is not so". Write which of the two you found.
 
 **Hard rule: every number has its command.** A number in a table comes with its unit and the
 command or the source that produces it. A number that was copied by hand is `⚠`.
@@ -102,24 +114,63 @@ accepted design it changes. Do not hide a conflict and do not resolve it; the ne
 
 1. **Find the design.** Look for a MIP or a note that already says what the paper will say.
    Read it whole. If there is one, the paper is an account of it.
-2. **List the claims** you intend to make, before the prose. For each: what would check it?
-3. **Check each one.** Fetch the page or the record; run the command; read the file at a commit.
-   Write the row in `REFERENCES.md` as you go, not after.
-4. **Write.** Short sentences. Active voice. One idea in a sentence. Numbers, not adjectives.
-   A technical word is explained the first time.
+2. **List the claims** you intend to make, before the prose. Give each one its kind, because the
+   kind says what can check it:
+
+   | Kind | It says | What checks it |
+   |---|---|---|
+   | a fact about a source | "the page says X" | the passage, quoted |
+   | a description | "there are ten buoys" | a count, a file, a record, with its date |
+   | a cause | "X makes Y cheaper" | a measurement. A reason is not one: mark it as a proposal |
+   | a forecast | "this will hold next year" | nothing yet. Say so |
+   | a design choice | "the truth is an instrument" | the design it comes from, at a commit |
+   | a claim of being first | "no benchmark has a Brazilian region" | nobody can check it by reading. Narrow it to what was looked at, and when |
+
+3. **Check each one**, and write the row in `REFERENCES.md` as you go, not after. A reference
+   passes three checks, and all three are against the source itself:
+   - **It exists**, and its title, authors, venue and year are copied from one record.
+   - **It is the work you mean.** An identifier that resolves can be another work. A preprint
+     can have a published version; cite that one.
+   - **It says what you say it says.** Quote the passage. Look for a correction or a retraction.
+
+   The verdict is one of three: *verified*, *mismatch* (it exists and does not say that) or
+   *not found*. Doubt is "not found". For what you looked for and did not cite, the log keeps
+   the search: where, with which words, on which day.
+4. **Write the body.** Short sentences. Active voice. One idea in a sentence. Numbers, not
+   adjectives. A technical word is explained the first time. A mark is short; the account of the
+   check is in the log, not in the sentence.
 5. **Cut what failed.** A claim that you could not check is marked `⚠` or removed. Do not soften
    it into a claim that sounds the same.
-6. **Write "What is not known"** from the `⚠` marks and from the design's own open questions.
-   Write a note for each idea the paper stands on, and a journal entry for each challenge the
-   work met, in the same pull request (`NOTES.md`). A claim that reading corrected is a journal
-   entry, not a silent edit.
-7. **Read it as a stranger.** For each sentence with a fact: can a reader find where it comes
-   from in one step?
-8. **Render it.** `just paper <research>` writes `<research>/<research>.pdf`. Read the PDF: a
-   citation that did not resolve shows as its key. Commit the PDF with the text it was made from.
-   Then run `just check <research>` and `just md-quality`; CI runs the same two.
-9. **Open a pull request.** Work on a branch and stage files by path. In the body, say what was
-   checked, what was not, and each decision that is the owner's. Do not merge.
+6. **Write the ends last.** "What is not known", from the `⚠` marks and from the design's own
+   open questions. Then the summary and the abstract, when the body exists: an opening that was
+   written first promises what the writer hoped, and the last one promises what the evidence
+   gives. Write a note for each idea the paper stands on, and a journal entry for each challenge
+   the work met, in the same pull request (`NOTES.md`). A claim that reading corrected is a
+   journal entry, not a silent edit.
+7. **The mechanical pass.** Faults that a tool or a count can find, before anybody judges the
+   text:
+   - **the numbers:** a number that is written in more than one place (the abstract, a section,
+     the site) is the same in each. List them and compare;
+   - **the names:** one word for one thing, from the first page to the last;
+   - **the facts after a style edit:** when a sentence was changed for its style, compare its
+     facts, numbers and citations with what it had before;
+   - `just paper <research>`, then read the PDF: a citation that did not resolve shows as its
+     key. Then `just check <research>` and `just md-quality`; CI runs the same.
+8. **The cold reader.** Give the rendered paper, and nothing else, to a reader that has not seen
+   the work: a fresh agent, or a person. Do not tell it what you think of the text.
+   - Ask it five to ten questions that a reader of the paper would ask. Where it answers wrong,
+     or cannot, the paper is unclear there.
+   - Ask it for faults. A finding has five parts: where; the words, quoted; the rule or the
+     evidence; why it matters; what to do. A finding that quotes nothing is dropped. Five that
+     are certain are worth more than thirty that are not.
+   - Fix, and write in the pull request what it found.
+9. **Open a pull request.** Work on a branch and stage files by path. In the body: what was
+   checked, with what each check printed, pasted; what was not; and each decision that is the
+   owner's. "Checked" with no output is not a check. Do not merge.
+
+When a paper reports a study (a trial, a review, a measurement on animals or people), name the
+reporting guideline for its design and follow it. When it has a statistic, give the number of
+cases, the exact value, the size of the effect and its interval. No paper here has either yet.
 
 ## Borrow, cite, propagate
 
@@ -157,9 +208,18 @@ first appears. Add no fact.
   XeLaTeX from `picasso`'s `paper` lab, pinned in `flake.lock`. There is no template and no arXiv
   bundle yet.
 - It does not check that a claim is true. It makes the writer say how it was checked.
+- It does not replace a referee. The cold reader of step 8 finds what is unclear and what is
+  unsupported; it does not judge whether the work matters.
 - It does not decide a thesis, a name, a licence or a release.
 
 ## Sources
+
+Two kinds. The working rules of the owner's own projects are below. The ideas from other
+people's skills for paper quality are in [`REA.md`](REA.md): seven repositories, twelve skills,
+each at a commit with its licence. Six of them are K-Dense's (Kassis, Agarwal, He, Patel and
+Brueckner, 2026, *Scientific Agent Skills*, arXiv:2609.00065); they are pinned in
+[`../skills.lock`](../skills.lock) and can be fetched as they are with `just skills fetch`, for a
+task that needs the skill itself and not only its idea.
 
 Read on 13 October 2026. Each line is a rule of this skill and the place it was read.
 

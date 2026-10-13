@@ -41,6 +41,11 @@ full, and [`TRADEMARKS.md`](TRADEMARKS.md) has the names and logos.
   `REUSE.toml`, `justfile`, `flake.nix`, `format/` (what every rendered paper shares),
   `scripts/`, `tools/` and `.claude/skills/`.
 - How a text is written, checked and released: `.claude/skills/ouro-paper/SKILL.md`.
+- **Other people's skills are used by link, never copied** (`.claude/skills/README.md`,
+  `.claude/skills/skills.lock`). The first ones are six skills of K-Dense's Scientific Agent
+  Skills (Kassis and others, 2026, arXiv:2609.00065), pinned at a commit. `just skills fetch`
+  brings them to a directory that Git ignores; do not commit it, and do not paste any of their
+  text into a tracked file. When a skill of theirs helped a work, the work cites that paper.
 
 ## Rules
 

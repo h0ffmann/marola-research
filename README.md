@@ -65,6 +65,21 @@ request and on `main`: [`pdf`](.github/workflows/pdf.yml) (one job for each rese
 [`site`](.github/workflows/site.yml), which also publishes the sites from `main`.
 [`AGENTS.md`](AGENTS.md) says what each one checks.
 
+## Skills by other people
+
+This repository's own skill, [`ouro-paper`](.claude/skills/ouro-paper/SKILL.md), learned from
+other people's skills for paper quality; [`REA.md`](.claude/skills/ouro-paper/REA.md) credits
+each one at a commit, with its licence. The largest source is K-Dense's library:
+
+> Kassis, T., Agarwal, V., He, Y., Patel, D., & Brueckner, A. M. (2026). *Scientific Agent
+> Skills: A Library of Procedural Knowledge for Research Agents*. arXiv:2609.00065.
+> <https://arxiv.org/abs/2609.00065>
+
+Six of its skills are used here **by link**: pinned in
+[`skills.lock`](.claude/skills/skills.lock) to a commit, never copied into this repository.
+`just skills fetch` brings them to one machine; [`.claude/skills/README.md`](.claude/skills/README.md)
+has the links and the rules.
+
 ## Ouroboric
 
 This repository is made in the Ouroboric way: the work documents itself as it documents its

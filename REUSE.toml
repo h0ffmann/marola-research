@@ -16,7 +16,7 @@ SPDX-License-Identifier = "CC-BY-4.0"
 
 # Code: what builds, checks and serves the texts.
 [[annotations]]
-path = ["scripts/**", ".github/**", "format/**", "justfile", "flake.nix", "flake.lock", ".gitignore", ".markdownlint-cli2.jsonc", ".vale.ini", ".vale/**", "*/site/**", "REUSE.toml"]
+path = ["scripts/**", ".github/**", "format/**", "justfile", "flake.nix", "flake.lock", ".gitignore", ".markdownlint-cli2.jsonc", ".vale.ini", ".vale/**", "*/site/**", "REUSE.toml", ".claude/skills/*/evals/**", ".claude/skills/skills.lock"]
 precedence = "closest"
 SPDX-FileCopyrightText = ["2026 Matheus Hoffmann", "2026 marola.dev"]
 SPDX-License-Identifier = "MIT"

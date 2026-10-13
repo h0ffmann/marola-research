@@ -1,0 +1,12 @@
+# skills.lock: other people's skills that this repository uses BY LINK. No file of theirs is here.
+# Each row pins one skill: where it lives, the commit it was read at, the Git tree of its directory, the
+# Git blob of its SKILL.md at that commit, and its licence as its own frontmatter states it.
+# `just skills check` asks GitHub that each blob is still what this file says; `just skills fetch` brings
+# the pinned directories into .claude/skills/.vendor/, which Git ignores. .claude/skills/README.md has the rest.
+# name	upstream	commit	path	tree	skill_md_blob	licence
+scientific-writing	K-Dense-AI/scientific-agent-skills	a1043ef544e3a100c28e70a736b6cf32554d0677	skills/scientific-writing	2fb90f9b84226432129a2cbd999857cc6eb98018	446993fcd4716ae54ab74bc2a91e3bc5af5235c7	MIT
+peer-review	K-Dense-AI/scientific-agent-skills	a1043ef544e3a100c28e70a736b6cf32554d0677	skills/peer-review	c490df78961197e52fd2f1649853e62568b429ca	d4f3c3e3b5c19fec2518d569ded7e37ac96a964b	MIT
+citation-management	K-Dense-AI/scientific-agent-skills	a1043ef544e3a100c28e70a736b6cf32554d0677	skills/citation-management	e838e1d0c96096867587bc116f2eec0ff925cbce	b63b589d4d423969a63e032e62c2b74969147c1c	MIT
+literature-review	K-Dense-AI/scientific-agent-skills	a1043ef544e3a100c28e70a736b6cf32554d0677	skills/literature-review	abbd5cd9f06e1fb4fae66345a4df790cc34d2ad8	5178dce6419cee412155e7b9dd523d5b2ef703f5	MIT
+scientific-critical-thinking	K-Dense-AI/scientific-agent-skills	a1043ef544e3a100c28e70a736b6cf32554d0677	skills/scientific-critical-thinking	a658236e69d700577a095bccf8d87fe7391bd22d	2a2fc151b5b13e4e11ece7410f21a14d5b25e30d	MIT
+statistical-analysis	K-Dense-AI/scientific-agent-skills	a1043ef544e3a100c28e70a736b6cf32554d0677	skills/statistical-analysis	d952f1decb93143a120f963d95fdd210a8a681d1	4ea7453a12e63f0dbc31d7a47ed41fe3ff4c4c1a	MIT

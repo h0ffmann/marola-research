@@ -412,7 +412,7 @@ fn standing_section() -> Element(msg) {
       ),
       item(
         "open",
-        "A design for the five rules",
+        "A design for the hard rules",
         "How Pekko, GCP and Besom meet the accepted design.",
       ),
       item("none", "Code", "None yet."),
