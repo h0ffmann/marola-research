@@ -10,7 +10,7 @@ the `README.md` of the research you work on, then the `ouro-paper` skill.
   (the text, its references, the log of how each was checked) and its rendered paper,
   `<research>/<research>.pdf`. Its code, when it has code, is in the same directory.
 - What every research shares is at the root: this file, `README.md` (the index), `justfile`,
-  `flake.nix`, `format/` (what every rendered paper shares) and `.claude/skills/`.
+  `flake.nix`, `format/` (what every rendered paper shares), `scripts/` and `.claude/skills/`.
 - How a text is written, checked and released: `.claude/skills/ouro-paper/SKILL.md`.
 
 ## Rules
@@ -32,6 +32,8 @@ the `README.md` of the research you work on, then the `ouro-paper` skill.
 ## Checks before a pull request
 
 - `just paper <research>` renders the PDF with no pandoc warning. Commit the PDF with its text.
+- A logo is a trademark of its project. Never commit a logo's file: list it in
+  `<research>/paper/logos.tsv` at a pinned commit with its sha256 (`scripts/logos.sh`).
 - Every entry of `refs.bib` has a row in `REFERENCES.md`.
 - The pull request says what was checked, what was not, and each decision that is the owner's.
 

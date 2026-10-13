@@ -18,6 +18,10 @@ style: research
 > 2026 with the note "needs refinement" [@mip0091]. This paper is the short public account of
 > it. If the two disagree, the MIP is right and this paper is out of date.
 >
+> **The logos.** The logos of marola and of Ouroboric on the first page are trademarks of their
+> projects. They say where this work is from and which way of working it follows. They do not
+> say that either project endorses this text.
+>
 > **How to read the marks.** **(v)** means that the claim was checked while this paper was
 > written, and [`REFERENCES.md`](REFERENCES.md) says how. **(MIP §n)** means that the claim is
 > the design's, from that section of MIP-0091; the MIP keeps its own list of what it checked and

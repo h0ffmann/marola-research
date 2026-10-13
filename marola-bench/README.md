@@ -46,3 +46,15 @@ framework, and whether the code moves here.
 | `paper/paper.md` | the text, with a mark on every claim |
 | `paper/refs.bib` | the references |
 | `paper/REFERENCES.md` | how each reference was checked |
+| `paper/logos.tsv` | the logos on the paper's first page: each SVG at a pinned commit, with its sha256 |
+
+## The logos
+
+The paper's first page shows the logos of marola and of Ouroboric, as the paper of
+h0ffmann/closed-source does: marola, because this is marola's research; Ouroboric, because the
+work is made in the Ouroboric way (`ouro-paper`), whose ideas are Bruno Valério's.
+
+Each logo is a trademark of its project and is not licensed by this repository. The SVG files
+are not committed: `just paper` downloads each one at a pinned commit, checks its sha256 and
+converts it to a vector PDF, so it is sharp at any size. The rendered `marola-bench.pdf` does
+contain them. Showing a logo here does not say that the project endorses this paper.

@@ -1,0 +1,5 @@
+# The logos on the first page of the paper: name, the SVG at a pinned commit, its sha256, where it links.
+# They are trademarks of their projects and are not licensed here, so the SVGs are never committed:
+# `just paper` downloads each one, checks the hash and converts it to a vector PDF (scripts/logos.sh).
+marola	https://raw.githubusercontent.com/marola-dev/marola/d0d576ea014335acbc190a09ce9fcbe0f89a391d/docs/assets/logo.svg	71567f8c69a5c5e18b8b712a280cae1dac402e6a2e7ceb331408a4e713159cf9	https://marola.dev
+ouroboric	https://raw.githubusercontent.com/ouroboric-dev/ouroboric/4ab80ed2486a5e0ab0ade13e5089c2a4acdb4216/docs/7-branding/identity/logo/ouroboric-logo-horizontal.svg	935eb9acf636f5da8651bdee14e6b53670e216d6a1667b46c48d62ec6f26f59d	https://github.com/ouroboric-dev

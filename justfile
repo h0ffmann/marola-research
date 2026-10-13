@@ -7,15 +7,19 @@ set shell := ["bash", "-euo", "pipefail", "-c"]
 default:
     @just --list
 
-# Render <research>/paper/paper.md to <research>/<research>.pdf. A pandoc warning stops it.
+# Render <research>/paper/paper.md to <research>/<research>.pdf, with the logos of
+# <research>/paper/logos.tsv above the title. A pandoc warning stops it.
 paper research:
     nix develop --extra-experimental-features 'nix-command flakes' --no-update-lock-file --command just _paper {{research}}
 
 _paper research:
     [ -f "{{research}}/paper/paper.md" ] || { echo "paper: no {{research}}/paper/paper.md" >&2; exit 1; }
+    scripts/logos.sh {{research}}
     cd "{{research}}/paper" && pandoc paper.md \
       --from markdown --citeproc --bibliography refs.bib --metadata link-citations=true \
-      --pdf-engine=xelatex --fail-if-warnings -H ../../format/header.tex \
+      --lua-filter ../../format/title.lua \
+      --pdf-engine=xelatex --fail-if-warnings \
+      -H ../../build/{{research}}/logos.tex -H ../../format/header.tex \
       -V geometry:margin=2.6cm -V fontsize=11pt -V colorlinks=true \
       -o "../{{research}}.pdf"
     @echo "paper: {{research}}/{{research}}.pdf"

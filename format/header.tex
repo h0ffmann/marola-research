@@ -1,6 +1,20 @@
-% Shared by every paper (justfile, `_paper`). The marks of the ouro-paper skill must print: the
-% text font has no warning sign, so that one character is taken from DejaVu Sans.
-% By file name, from the TeX tree of the pinned toolchain: a font of the machine is never used.
+% Shared by every paper (justfile, `_paper`).
+%
+% 1. The marks of the ouro-paper skill must print. The text font has no warning sign, so that one
+%    character is taken from DejaVu Sans, by file name, from the TeX tree of the pinned
+%    toolchain: a font of the machine is never used.
 \newfontfamily\markfont{DejaVuSans.ttf}
 \catcode`\⚠=\active
 \protected\def⚠{{\markfont\char"26A0\relax}}
+% 2. The row of logos under the title block, where h0ffmann/closed-source's paper has it: each
+%    9 mm high, 10 mm apart, centred. scripts/logos.sh writes \paperlogos before this file is
+%    read; it is empty for a research with no logos.
+% pandoc loads graphicx only for a text that has a picture of its own.
+\usepackage{graphicx}
+\providecommand{\paperlogos}{}
+\makeatletter
+\let\research@maketitle\@maketitle
+\def\@maketitle{%
+  \research@maketitle
+  \ifx\paperlogos\empty\else\begin{center}\paperlogos\end{center}\vskip 1em\fi}
+\makeatother
