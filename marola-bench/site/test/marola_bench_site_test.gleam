@@ -68,3 +68,13 @@ pub fn the_page_states_its_terms_test() {
   assert string.contains(html, "All rights reserved")
   assert string.contains(html, "/blob/main/REUSE.md")
 }
+
+pub fn the_doi_is_on_the_cover_and_in_the_citation_test() {
+  let html = app.initial() |> app.view |> element.to_string
+  assert string.starts_with(content.doi, "10.5281/zenodo.")
+  // On the cover, and in the citation at the end.
+  assert list.length(string.split(html, "https://doi.org/" <> content.doi)) - 1
+    >= 3
+  assert string.contains(html, "https://doi.org/" <> content.version_doi)
+  assert string.contains(html, content.released)
+}

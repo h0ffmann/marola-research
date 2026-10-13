@@ -1,0 +1,7 @@
+# The DOIs of this research, as Zenodo and DataCite hold them (read on 13 October 2026). One row: a key and its value.
+# After a release: write the new version here, then `just citation` and `just doi marola-bench`.
+# key	value
+doi	10.5281/zenodo.23352633
+version	v0.1.0
+version_doi	10.5281/zenodo.23352634
+released	2026-10-13

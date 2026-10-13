@@ -3,6 +3,7 @@ title: "marola-bench: a proposal for a WeatherBench for Brazil"
 subtitle: "One scorer, Brazilian truth, and a ranking rule written before the scores"
 author: "Matheus Hoffmann"
 status: draft
+doi: 10.5281/zenodo.23352633
 bench: "The bench are the score series performed by any Forecaster, Registered by an Actor."
 abstract: |
   Public weather benchmarks made forecast models comparable, but for a person on a Brazilian
@@ -23,6 +24,10 @@ style: research
 
 # marola-bench: a proposal for a WeatherBench for Brazil
 
+> **Cite this as.** Hoffmann, M. (2026). *marola-bench: a proposal for a WeatherBench for
+> Brazil*. Zenodo. <https://doi.org/10.5281/zenodo.23352633>. All rights reserved: read it and cite it; do not copy
+> it or share it without the author's acknowledgement.
+>
 > **What this is.** A proposal, for a reader outside marola. It says what the benchmark is for,
 > what it copies, and what it adds. It reports no result: no wave forecast has been scored.
 >

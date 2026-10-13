@@ -56,6 +56,7 @@ _current research:
 check research:
     just refs {{research}}
     just current {{research}}
+    {{nix}} --command scripts/doi-check.sh {{research}}
 
 # Three analysers over the Markdown files: markdownlint-cli2, Vale, lychee.
 # `just md-quality --online` also fetches every web link; `--self-test` gives each one a bad file.
@@ -66,6 +67,15 @@ md-quality *args:
 # agent he asked for that release by name: a DOI cannot be deleted. Add --dry-run to check first.
 release research version *args:
     scripts/release.sh {{research}} {{version}} {{args}}
+
+# Write `.zenodo.json` and `CITATION.cff` from <research>/zenodo.json and <research>/doi.tsv.
+# `just citation <research> --check` fails when either is stale.
+citation research *args:
+    python3 scripts/citation.py {{research}} {{args}}
+
+# The DOI of a released research is in every place a reader or an index looks for it.
+doi research:
+    scripts/doi-check.sh {{research}}
 
 # The slip box of a research keeps its rules (NOTES.md).
 notes research:
