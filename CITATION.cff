@@ -1,0 +1,29 @@
+# Generated from marola-bench/zenodo.json and marola-bench/doi.tsv by scripts/citation.py; do not edit.
+cff-version: 1.2.0
+message: "All rights reserved. Read it and cite it; do not copy or share it. See REUSE.md."
+type: generic
+title: "marola-bench: a proposal for a WeatherBench for Brazil"
+authors:
+  - family-names: "Hoffmann"
+    given-names: "Matheus"
+    orcid: "https://orcid.org/0009-0009-1056-7661"
+    affiliation: "Escola Politécnica, Universidade Federal do Rio de Janeiro"
+repository-code: "https://github.com/marola-dev/marola-research"
+url: "https://marola-dev.github.io/marola-research/marola-bench/"
+doi: 10.5281/zenodo.23352633
+version: "v0.1.0"
+date-released: 2026-10-13
+keywords:
+  - "weather forecast verification"
+  - "wave forecasting"
+  - "benchmark"
+  - "WeatherBench"
+  - "ocean waves"
+  - "buoy observations"
+  - "Brazil"
+  - "South Atlantic"
+  - "forecast evaluation"
+  - "actor model"
+  - "Apache Pekko"
+  - "reactive systems"
+  - "research proposal"

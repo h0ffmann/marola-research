@@ -109,6 +109,7 @@ pub fn view(model: Model) -> Element(Msg) {
       references_section(),
       checks_section(),
       unknown_section(),
+      cite_section(),
     ]),
     footer(),
   ])
@@ -125,6 +126,23 @@ fn cover() -> Element(msg) {
       html.h1([], [html.text(name)]),
       html.p([attribute.class("what")], [html.text(what)]),
       html.p([attribute.class("sub")], [html.text(content.subtitle)]),
+      case content.doi {
+        "" -> element.none()
+        doi ->
+          html.p([attribute.class("doi-line")], [
+            html.a(
+              [
+                attribute.class("doi"),
+                attribute.href("https://doi.org/" <> doi),
+                attribute.rel("noopener"),
+              ],
+              [
+                html.span([], [html.text("DOI")]),
+                html.span([], [html.text(doi)]),
+              ],
+            ),
+          ])
+      },
       html.figure([attribute.class("series")], [
         html.img([
           attribute.src("drawings/series.svg"),
@@ -166,6 +184,7 @@ fn cover() -> Element(msg) {
         link("#journal", "Journal"),
         link("#checks", "Checks"),
         link("#unknown", "Not known"),
+        link("#cite", "Cite"),
       ]),
     ]),
   ])
@@ -620,6 +639,48 @@ fn unknown_section() -> Element(msg) {
       list.map(content.unknowns, fn(u) { html.li([], [html.text(u)]) }),
     ),
   ])
+}
+
+/// How to cite the research: its DOI, and the DOI of the released version (doi.tsv).
+fn cite_section() -> Element(msg) {
+  case content.doi {
+    "" -> element.none()
+    doi ->
+      html.section([], [
+        head("cite", "Cite", external(tree("README.md"), "the research's page")),
+        html.p([attribute.class("prose")], [
+          html.text(
+            "Whoever uses this work, a person or an agent, cites it: the author, the title, and the DOI as a link.",
+          ),
+        ]),
+        html.blockquote([attribute.class("citation")], [
+          html.p([], [
+            html.text(
+              content.author
+              <> " ("
+              <> string.slice(content.date, 0, 4)
+              <> "). ",
+            ),
+            html.i([], [html.text(content.title)]),
+            html.text(". Zenodo. "),
+            external("https://doi.org/" <> doi, "https://doi.org/" <> doi),
+          ]),
+        ]),
+        html.ul([attribute.class("dois")], [
+          html.li([], [
+            html.b([], [html.text("the work, always its latest version")]),
+            external("https://doi.org/" <> doi, doi),
+          ]),
+          html.li([], [
+            html.b([], [html.text(content.released)]),
+            external(
+              "https://doi.org/" <> content.version_doi,
+              content.version_doi,
+            ),
+          ]),
+        ]),
+      ])
+  }
 }
 
 fn footer() -> Element(msg) {

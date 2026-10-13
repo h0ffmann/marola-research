@@ -24,5 +24,11 @@ jobs:
       - run: nix develop --no-update-lock-file .#md --command scripts/md-quality.sh
       - name: the slip box of each research keeps its rules
         run: for d in */notes; do scripts/notes-check.sh "${d%%/*}"; done
+      - name: the citation files are what each research's metadata makes
+        run: |
+          python3 scripts/citation.py --self-test
+          for f in */zenodo.json; do python3 scripts/citation.py "${f%%/*}" --check; done
+      - name: the DOI of each released research is in every place
+        run: for f in */doi.tsv; do scripts/doi-check.sh "${f%%/*}"; done
       - name: every file has a licence and a copyright
         run: nix develop --no-update-lock-file .#md --command reuse lint

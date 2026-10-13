@@ -72,6 +72,8 @@ that can fail on `main` runs on the pull request first.
 | `just md-quality --online` | every web link answers | `live links / alive`, also each Monday |
 | `just notes <research>` | the slip box keeps its rules: front matter, ids, links, the index | `.md / quality` |
 | `just reuse` | every file has a licence and a copyright in `REUSE.toml` | `.md / quality` |
+| `just citation <research> --check` | the record's metadata is valid and names a licence; `.zenodo.json` and `CITATION.cff` are what it makes | `.md / quality` |
+| `just doi <research>` | the DOI of a released research is in every place a reader or an index looks | `.md / quality`, and `pdf / build` for the PDF |
 | `just pages` | every research's site: the generator's tests, the site's tests, the build | `site / build`; `site / deploy` publishes from `main` |
 
 - After you change a paper's text, run `just paper <research>` and commit the PDF with it.
@@ -82,6 +84,15 @@ that can fail on `main` runs on the pull request first.
   it.
 - A quotation is in double quotation marks. Vale does not judge the words inside them.
 - The pull request says what was checked, what was not, and each decision that is the owner's.
+
+**The DOI discipline.** A DOI that is in one page and missing from the next is how a work stops
+being cited. `<research>/doi.tsv` holds the DOIs of a research that was released, and
+`just doi <research>` fails unless the DOI of the work is in the index, the research's page, the
+terms, these rules, `CITATION.cff`, the paper's text and its PDF. The site reads `doi.tsv` when
+it is built. After a release, in one pull request: write the new version in `doi.tsv`, run
+`just citation <research>` and `just paper <research>`, then `just doi <research>`.
+`<research>/zenodo.json` is the one citation file edited by hand: `.zenodo.json` and
+`CITATION.cff` at the root are copies of what it makes, and it must name a `license`.
 
 A release is of one research: the tag `<research>-vX.Y.Z` (`just release`), and the `release`
 workflow publishes it with the research's PDF. marola-bench's record was made from the owner's

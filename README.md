@@ -1,5 +1,11 @@
 # marola-research
 
+[![marola-bench: DOI 10.5281/zenodo.23352633](https://img.shields.io/badge/marola--bench-10.5281%2Fzenodo.23352633-1682D4?style=flat-square)](https://doi.org/10.5281/zenodo.23352633)
+[![pdf](https://img.shields.io/github/actions/workflow/status/marola-dev/marola-research/pdf.yml?branch=main&label=pdf&style=flat-square)](https://github.com/marola-dev/marola-research/actions/workflows/pdf.yml)
+[![.md](https://img.shields.io/github/actions/workflow/status/marola-dev/marola-research/md.yml?branch=main&label=.md&style=flat-square)](https://github.com/marola-dev/marola-research/actions/workflows/md.yml)
+[![live links](https://img.shields.io/github/actions/workflow/status/marola-dev/marola-research/links.yml?branch=main&label=live%20links&style=flat-square)](https://github.com/marola-dev/marola-research/actions/workflows/links.yml)
+[![site](https://img.shields.io/github/actions/workflow/status/marola-dev/marola-research/site.yml?branch=main&label=site&style=flat-square)](https://github.com/marola-dev/marola-research/actions/workflows/site.yml)
+
 The science of [marola](https://github.com/marola-dev/marola). One directory is one research:
 its paper, its sources, the log of how each source was checked, and later its code.
 
@@ -37,6 +43,19 @@ esbuild). A site is Gleam and Lustre; its facts come from the research's files t
 [`AGENTS.md`](AGENTS.md) has the map and the rules;
 [`ouro-paper`](.claude/skills/ouro-paper/SKILL.md) is how a text is written and checked. The
 skill has no evals yet.
+
+## Cite
+
+Each research that was released has its own DOI, and its page says how to cite it.
+
+| Research | Cite the work | This version |
+|---|---|---|
+| marola-bench | [10.5281/zenodo.23352633](https://doi.org/10.5281/zenodo.23352633) | v0.1.0: [10.5281/zenodo.23352634](https://doi.org/10.5281/zenodo.23352634) |
+
+> Hoffmann, M. (2026). *marola-bench: a proposal for a WeatherBench for Brazil*. Zenodo.
+> <https://doi.org/10.5281/zenodo.23352633>
+
+GitHub's "Cite this repository" gives the same, from [`CITATION.cff`](CITATION.cff).
 
 ## Checks
 

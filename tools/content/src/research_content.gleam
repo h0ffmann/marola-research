@@ -295,6 +295,16 @@ fn generate(research: String, package: String) -> Nil {
       "<!-- easy-abstract:start -->",
       "<!-- easy-abstract:end -->",
     )
+  // The DOIs of a research that was released: the rows of its doi.tsv.
+  let ids =
+    string.split(read(dir <> "doi.tsv"), "\n")
+    |> list.filter_map(fn(l) {
+      case string.starts_with(l, "#"), string.split(l, "\t") {
+        False, [key, value] -> Ok(#(key, value))
+        _, _ -> Error(Nil)
+      }
+    })
+  let id = fn(key: String) { result.unwrap(list.key_find(ids, key), "") }
   let logo_rows =
     logos(read(dir <> "paper/logos.tsv"))
     |> list.map(fn(l) {
@@ -330,6 +340,21 @@ pub const slug = "
 
 pub const revision = "
     <> lit(revision())
+    <> "
+
+/// The DOI of the work, which always opens its latest version (doi.tsv). Empty before the first
+/// release.
+pub const doi = "
+    <> lit(id("doi"))
+    <> "
+
+/// The released version and its own DOI.
+pub const released = "
+    <> lit(id("version"))
+    <> "
+
+pub const version_doi = "
+    <> lit(id("version_doi"))
     <> "
 
 pub const title = "
