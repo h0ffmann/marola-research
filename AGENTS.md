@@ -31,10 +31,23 @@ the `README.md` of the research you work on, then the `ouro-paper` skill.
 
 ## Checks before a pull request
 
-- `just paper <research>` renders the PDF with no pandoc warning. Commit the PDF with its text.
+Run them before you open it. CI runs the same ones on the pull request and on `main`: a check
+that can fail on `main` runs on the pull request first.
+
+| Command | What it checks | In CI |
+|---|---|---|
+| `just check <research>` | every entry of `refs.bib` has a row in `REFERENCES.md`; the paper builds with no pandoc warning; the committed PDF is the one its text makes | `pdf / build (<research>)`, one job for each research |
+| `just md-quality` | the structure (markdownlint-cli2), the prose rules (Vale) and the links to files (lychee) of every Markdown file | `.md / quality` |
+| `just md-quality --online` | every web link answers | `live links / alive`, also each Monday |
+
+- After you change a paper's text, run `just paper <research>` and commit the PDF with it.
+- A new research needs no change in CI: a directory with `paper/paper.md` gets its own job.
 - A logo is a trademark of its project. Never commit a logo's file: list it in
   `<research>/paper/logos.tsv` at a pinned commit with its sha256 (`scripts/logos.sh`).
-- Every entry of `refs.bib` has a row in `REFERENCES.md`.
+- A link to a page that needs a login is written as code, not as a link: the check cannot open
+  it.
+- A quotation is in double quotation marks. Vale does not judge the words inside them.
 - The pull request says what was checked, what was not, and each decision that is the owner's.
 
-There is no continuous check in this repository yet.
+Not here, because there is nothing for them to check yet: a citation check (no `.zenodo.json`),
+a release workflow (no release; an agent never tags) and a site.

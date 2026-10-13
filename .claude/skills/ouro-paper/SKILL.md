@@ -111,6 +111,7 @@ accepted design it changes. Do not hide a conflict and do not resolve it; the ne
    from in one step?
 8. **Render it.** `just paper <research>` writes `<research>/<research>.pdf`. Read the PDF: a
    citation that did not resolve shows as its key. Commit the PDF with the text it was made from.
+   Then run `just check <research>` and `just md-quality`; CI runs the same two.
 9. **Open a pull request.** Work on a branch and stage files by path. In the body, say what was
    checked, what was not, and each decision that is the owner's. Do not merge.
 
@@ -147,8 +148,8 @@ first appears. Add no fact.
 ## What this skill does not do
 
 - It does not make a typeset journal paper. `just paper` renders a plain PDF with pandoc and
-  XeLaTeX from `picasso`'s `paper` lab, pinned in `flake.lock`. There is no template, no arXiv
-  bundle and no continuous check yet.
+  XeLaTeX from `picasso`'s `paper` lab, pinned in `flake.lock`. There is no template and no arXiv
+  bundle yet.
 - It does not check that a claim is true. It makes the writer say how it was checked.
 - It does not decide a thesis, a name, a licence or a release.
 

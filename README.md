@@ -29,9 +29,16 @@ It needs Nix and `just`. The tools (pandoc, XeLaTeX) come from
 [`ouro-paper`](.claude/skills/ouro-paper/SKILL.md) is how a text is written and checked. The
 skill has no evals yet.
 
+## Checks
+
+`just check <research>` and `just md-quality` are what CI runs, on each pull request and on
+`main`: [`pdf`](.github/workflows/pdf.yml) (one job for each research),
+[`.md`](.github/workflows/md.yml) and [`live links`](.github/workflows/links.yml).
+[`AGENTS.md`](AGENTS.md) says what each one checks.
+
 ## Not here yet
 
-A release, a DOI, continuous checks, and any code of a research.
+A release, a DOI, and any code of a research.
 
 ## Licence
 
