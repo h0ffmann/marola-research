@@ -7,10 +7,20 @@ the `README.md` of the research you work on, then the `ouro-paper` skill.
 
 - One directory at the root is one research: `marola-bench/` is the first.
 - A research has a `README.md` (what it is, its hard rules, its status), a `paper/` directory
-  (the text, its references, the log of how each was checked) and its rendered paper,
-  `<research>/<research>.pdf`. Its code, when it has code, is in the same directory.
-- What every research shares is at the root: this file, `README.md` (the index), `justfile`,
-  `flake.nix`, `format/` (what every rendered paper shares), `scripts/` and `.claude/skills/`.
+  (the text, its references, the log of how each was checked), its rendered paper
+  (`<research>/<research>.pdf`), `notes/` (a slip box), `journal/` (one entry for each challenge
+  met) and `site/` (its website). Its code, when it has code, is in the same directory.
+- The rules of the notes and the journal: `NOTES.md`. When you learn a thing the next session
+  needs, write a note. When a task met a challenge, write a journal entry in the same pull
+  request.
+- A site is Gleam and Lustre. Its facts come from the research's files through `tools/content`
+  (one generator for every research); never write a title, a rule, a count or a status in
+  `site/src` by hand. The sentences that tell the story are written in the site.
+- Licence and copyright for every file: `REUSE.toml`. A new kind of file needs no header; a new
+  directory of code needs its path there.
+- What every research shares is at the root: this file, `README.md` (the index), `NOTES.md`,
+  `REUSE.toml`, `justfile`, `flake.nix`, `format/` (what every rendered paper shares),
+  `scripts/`, `tools/` and `.claude/skills/`.
 - How a text is written, checked and released: `.claude/skills/ouro-paper/SKILL.md`.
 
 ## Rules
@@ -39,6 +49,9 @@ that can fail on `main` runs on the pull request first.
 | `just check <research>` | every entry of `refs.bib` has a row in `REFERENCES.md`; the paper builds with no pandoc warning; the committed PDF is the one its text makes | `pdf / build (<research>)`, one job for each research |
 | `just md-quality` | the structure (markdownlint-cli2), the prose rules (Vale) and the links to files (lychee) of every Markdown file | `.md / quality` |
 | `just md-quality --online` | every web link answers | `live links / alive`, also each Monday |
+| `just notes <research>` | the slip box keeps its rules: front matter, ids, links, the index | `.md / quality` |
+| `just reuse` | every file has a licence and a copyright in `REUSE.toml` | `.md / quality` |
+| `just pages` | every research's site: the generator's tests, the site's tests, the build | `site / build`; `site / deploy` publishes from `main` |
 
 - After you change a paper's text, run `just paper <research>` and commit the PDF with it.
 - A new research needs no change in CI: a directory with `paper/paper.md` gets its own job.
@@ -49,5 +62,5 @@ that can fail on `main` runs on the pull request first.
 - A quotation is in double quotation marks. Vale does not judge the words inside them.
 - The pull request says what was checked, what was not, and each decision that is the owner's.
 
-Not here, because there is nothing for them to check yet: a citation check (no `.zenodo.json`),
-a release workflow (no release; an agent never tags) and a site.
+Not here, because there is nothing for them to check yet: a citation check (no `.zenodo.json`)
+and a release workflow (no release; an agent never tags).

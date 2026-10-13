@@ -61,3 +61,39 @@ check research:
 # `just md-quality --online` also fetches every web link; `--self-test` gives each one a bad file.
 md-quality *args:
     {{nix}} .#md --command scripts/md-quality.sh {{args}}
+
+# The slip box of a research keeps its rules (NOTES.md).
+notes research:
+    scripts/notes-check.sh {{research}}
+
+# Licence and copyright for every file (REUSE.toml).
+reuse:
+    {{nix}} .#md --command reuse lint
+
+# Build <research>/site into <research>/site/dist: the content from the research's files
+# (tools/content, shared by every research), the tests, the bundle, the first render, and the
+# committed PDF as paper.pdf.
+site research:
+    {{nix}} .#site --command just _site {{research}}
+
+_site research:
+    [ -f "{{research}}/site/gleam.toml" ] || { echo "site: {{research}} has no site/" >&2; exit 1; }
+    # The page names workflows: each one must be a file in .github/workflows/.
+    for f in $(grep -oE '"[a-z]+\.yml"' {{research}}/site/src/*/app.gleam | tr -d '"' | sort -u); do [ -f ".github/workflows/$f" ] || { echo "site: the page names $f, which is not a workflow" >&2; exit 1; }; done
+    cd tools/content && gleam format --check src test && gleam test && gleam run --no-print-progress -- {{research}} "$(sed -n 's/^name = "\(.*\)"$/\1/p' ../../{{research}}/site/gleam.toml)"
+    cd "{{research}}/site" && gleam format src/*/content.gleam && gleam format --check src test
+    cd "{{research}}/site" && gleam test
+    cd "{{research}}/site" && rm -rf dist && mkdir -p dist && gleam build \
+      && esbuild entry.mjs --bundle --minify --format=esm --outfile=dist/app.js --log-level=warning \
+      && gleam run -m "$(sed -n 's/^name = "\(.*\)"$/\1/p' gleam.toml)/prerender" --no-print-progress > dist/index.html \
+      && cp -R static/. dist/
+    [ ! -f "{{research}}/{{research}}.pdf" ] || cp "{{research}}/{{research}}.pdf" "{{research}}/site/dist/paper.pdf"
+    @echo "site: {{research}}/site/dist"
+
+# Every research's site, as one tree for GitHub Pages: build/pages/<research>/ and an index.
+pages:
+    rm -rf build/pages && mkdir -p build/pages
+    for f in */site/gleam.toml; do r="${f%%/*}"; just site "$r" && cp -R "$r/site/dist" "build/pages/$r"; done
+    scripts/site-index.sh build/pages
+    @echo "pages: build/pages"
+

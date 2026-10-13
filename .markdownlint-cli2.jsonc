@@ -12,6 +12,7 @@
     // Tables are not padded into columns.
     "MD060": false
   },
-  "globs": ["**/*.md"],
-  "ignores": ["build/**"]
+  // The files are given by scripts/md-quality.sh (the tracked ones). No "globs" here: the tool
+  // would add them to that list and read the packages a site's build downloads.
+  "ignores": ["build/**", "**/site/build/**", "**/site/dist/**", "tools/*/build/**"]
 }

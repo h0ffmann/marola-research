@@ -1,0 +1,47 @@
+# site — build the website of every research that has a `site/` directory (Gleam and Lustre,
+# `just pages`) on each pull request and each push to main, and publish the tree to GitHub Pages
+# from main: <pages>/<research>/ for each research, and an index that lists them.
+# Needs Settings → Pages → Source: GitHub Actions. The toolchain is picasso's gleam-website lab,
+# through flake.nix.
+name: site
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+      - name: just pages (content, tests, bundle and first render of each research's site)
+        run: nix develop --no-update-lock-file .#site --command just pages
+      - uses: actions/upload-pages-artifact@v4
+        if: github.event_name != 'pull_request'
+        with:
+          path: build/pages
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

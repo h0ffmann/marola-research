@@ -3,6 +3,18 @@ title: "marola-bench: a proposal for a WeatherBench for Brazil"
 subtitle: "One scorer, Brazilian truth, and a ranking rule written before the scores"
 author: "Matheus Hoffmann"
 status: draft
+bench: "The bench are the score series performed by any Forecaster, Registered by an Actor."
+abstract: |
+  Public weather benchmarks made forecast models comparable, but for a person on a Brazilian
+  beach three things are missing in them: a region that is Brazil, a score for ocean waves, and
+  an instrument as the truth. This paper proposes marola-bench, which keeps the method of
+  WeatherBench, WeatherBench 2 and Operational WeatherBench and changes those three things. The
+  bench is defined as the set of score series: the scores of any forecaster against the
+  observations of a point, in order of time. Observation points are added by hand, and one actor
+  for each point asks the forecasters and registers the scores. The paper states five hard rules
+  of the owner for the implementation (Apache Pekko and Scala 3, GCP, Besom, a cheap and
+  reliable cluster) and says where they change the accepted design, MIP-0091. It reports no
+  result: no forecast has been scored, and nothing has been built.
 version: "v0 (a proposal, not peer reviewed; no score has been computed)"
 date: 2026-10-13
 related: [REFERENCES.md, refs.bib, ../README.md, ../../.claude/skills/ouro-paper/SKILL.md, "https://github.com/marola-dev/marola/blob/cf7bd4f/docs/MIPs/MIP-0091-marola-forecaster-architecture.md"]

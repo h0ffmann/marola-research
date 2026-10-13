@@ -76,6 +76,9 @@ The owner tags. An agent prepares the metadata and gives the owner the command.
 <research>/
   README.md         what the research is, its hard rules, its status
   <research>.pdf    the rendered paper (`just paper <research>`)
+  notes/            the slip box: one idea in one note (NOTES.md)
+  journal/          one entry for each challenge met (NOTES.md)
+  site/             the website, built from the files of this directory
   paper/
     paper.md        the text: front matter, then prose with a mark on each claim
     refs.bib        every reference; a DOI where one exists
@@ -107,6 +110,9 @@ accepted design it changes. Do not hide a conflict and do not resolve it; the ne
 5. **Cut what failed.** A claim that you could not check is marked `⚠` or removed. Do not soften
    it into a claim that sounds the same.
 6. **Write "What is not known"** from the `⚠` marks and from the design's own open questions.
+   Write a note for each idea the paper stands on, and a journal entry for each challenge the
+   work met, in the same pull request (`NOTES.md`). A claim that reading corrected is a journal
+   entry, not a silent edit.
 7. **Read it as a stranger.** For each sentence with a fact: can a reader find where it comes
    from in one step?
 8. **Render it.** `just paper <research>` writes `<research>/<research>.pdf`. Read the PDF: a
