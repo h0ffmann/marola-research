@@ -1,0 +1,25 @@
+version = 1
+
+# Licence and copyright for every file, in one place, with no header in any file: the pattern of
+# the ouroboric-dev repositories (ouroboric-dev/ouroboric's REUSE.toml at b355b1d), which
+# marola-dev/marola and h0ffmann/closed-source follow too. Texts are CC BY 4.0; code is MIT, the
+# licence this repository started with (LICENSE). When several blocks match a file, the closest
+# one wins. Check with `just reuse` (`reuse lint`).
+
+# Texts: the papers, their notes and journals, the pages that explain the repository.
+[[annotations]]
+path = ["**"]
+precedence = "closest"
+SPDX-FileCopyrightText = ["2026 Matheus Hoffmann", "2026 marola.dev"]
+SPDX-License-Identifier = "CC-BY-4.0"
+
+# Code: what builds, checks and serves the texts.
+[[annotations]]
+path = ["scripts/**", ".github/**", "format/**", "justfile", "flake.nix", "flake.lock", ".gitignore", ".markdownlint-cli2.jsonc", ".vale.ini", ".vale/**", "*/site/**", "REUSE.toml"]
+precedence = "closest"
+SPDX-FileCopyrightText = ["2026 Matheus Hoffmann", "2026 marola.dev"]
+SPDX-License-Identifier = "MIT"
+
+# A rendered paper shows the logos of marola and of Ouroboric on its first page. The text of the
+# PDF is CC BY 4.0. The logos in it are trademarks of their projects and are not licensed here;
+# their files are never committed (<research>/paper/logos.tsv, scripts/logos.sh).

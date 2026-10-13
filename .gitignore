@@ -2,3 +2,8 @@ build/
 result
 result-*
 .lycheecache
+# A site: the build, the bundle and the generated content.
+*/site/build/
+*/site/dist/
+*/site/src/*/content.gleam
+tools/content/build/

@@ -55,11 +55,15 @@ vale --no-wrap --output=line "${english[@]}" >&2 || bad=1
 # down. A site that is busy for a moment must not fail a pull request, and a dead link must: each
 # link is tried five times, and if one still fails lychee runs once more after a minute, which
 # fetches only the links that failed (`--cache`).
+# The repository's own published site is not fetched: a page that a pull request adds does not
+# exist before the pull request is merged, and `site / build` is the check of what it will be.
+pages='^https://marola-dev\.github\.io/marola-research/'
 if [ "$online" = 1 ]; then
   echo "md-quality: links: lychee on ${#all[@]} files, web links too" >&2
   web() {
     lychee --no-progress --include-fragments --max-concurrency 6 --max-retries 4 --retry-wait-time 5 \
-      --timeout 30 --cache --max-cache-age 1h --accept 200,403,405,429 "${all[@]}" >&2
+      --timeout 30 --cache --max-cache-age 1h --accept 200,403,405,429 \
+      --exclude "$pages" "${all[@]}" >&2
   }
   rm -f .lycheecache
   web || { echo "md-quality: links: a link did not answer; the second and last try in 60 s" >&2; sleep 60; web || bad=1; }

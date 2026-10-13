@@ -1,0 +1,178 @@
+/* marola-bench. The subject is the sea off Brazil and an instrument that floats on it, so the
+   page is the deep blue of open water, the pale of foam, and one accent: the yellow of a wave
+   buoy. The one bold thing is the cover's chart, which is empty because the bench is.
+   Type: Fraunces for the headings, Source Sans 3 for the text, IBM Plex Mono only where the page
+   shows data (the chart's caption, the counts, the tags).
+   No motion. One orchestrated thing would be the series drawing itself, and there is no series. */
+:root {
+  --sea: #0B2A3F;
+  --deep: #071C2B;
+  --foam: #F4F8F9;
+  --surface: #E6EEF1;
+  --ink: #0E1B24;
+  --muted: #4A5B66;
+  --rule: #C4D2D9;
+  --buoy: #F2B705;
+  --buoy-text: #7A5A00;
+  --on-sea: #EAF2F5;
+  --ok: #1F6F4A;
+  --open: #A8480C;
+  --display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --text: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+  --data: 'IBM Plex Mono', ui-monospace, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --foam: #0A1F2D; --surface: #10293A; --ink: #E6EEF2; --muted: #A3B4BE; --rule: #24404F;
+    --buoy-text: #F2B705; --ok: #6FCF9F; --open: #F2A56B;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --foam: #0A1F2D; --surface: #10293A; --ink: #E6EEF2; --muted: #A3B4BE; --rule: #24404F;
+  --buoy-text: #F2B705; --ok: #6FCF9F; --open: #F2A56B;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--foam); color: var(--ink); font: 400 19px/1.55 var(--text); }
+.wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+a { color: inherit; text-decoration: underline; text-decoration-color: var(--buoy); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+a:hover { text-decoration-color: currentColor; }
+:focus-visible { outline: 3px solid var(--buoy); outline-offset: 3px; }
+
+/* The cover */
+.cover { background: var(--sea); color: var(--on-sea); padding: 40px 0 0; }
+.imprint { margin: 0 0 56px; font: 500 14px/1 var(--data); color: rgba(234, 242, 245, .78); }
+.cover h1 { margin: 0; font: 800 clamp(54px, 11vw, 132px)/.92 var(--display); letter-spacing: -.03em; color: #fff; }
+.what { margin: 14px 0 0; font: 400 clamp(24px, 3.6vw, 40px)/1.15 var(--display); color: var(--buoy); max-width: 18em; }
+.cover .sub { margin: 18px 0 0; max-width: 34em; color: rgba(234, 242, 245, .86); }
+.series { margin: 44px 0 0; }
+.series img { display: block; width: 100%; height: auto; }
+.series figcaption { margin-top: 12px; max-width: 46em; font: 400 14px/1.5 var(--data); color: rgba(234, 242, 245, .84); }
+.series figcaption b { color: var(--buoy); font-weight: 500; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 34px 0 0; }
+.button { display: inline-block; padding: 13px 20px; border: 2px solid var(--buoy); background: var(--buoy); color: #1A1400; font: 600 17px/1 var(--text); text-decoration: none; }
+.button:hover { background: #FFD043; border-color: #FFD043; }
+.button.quiet { background: transparent; color: var(--on-sea); border-color: rgba(234, 242, 245, .5); }
+.button.quiet:hover { background: transparent; border-color: var(--on-sea); }
+.jump { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 46px 0 0; padding: 16px 0 18px; border-top: 1px solid rgba(234, 242, 245, .22); }
+.jump a { font: 500 14px/1.4 var(--data); text-decoration: none; color: rgba(234, 242, 245, .86); }
+.jump a:hover { color: var(--buoy); }
+
+/* Sections */
+main section { padding: 64px 0 0; }
+main section:last-child { padding-bottom: 80px; }
+.head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 24px; border-top: 2px solid var(--ink); padding-top: 14px; }
+.head h2 { margin: 0; font: 600 clamp(28px, 4vw, 42px)/1.1 var(--display); letter-spacing: -.015em; }
+.head > a { font: 400 14px/1.4 var(--data); color: var(--muted); }
+.prose { max-width: 40em; margin: 18px 0 0; }
+.prose p { margin: 0 0 14px; }
+.note { margin: 16px 0 0; max-width: 44em; font-size: 16px; color: var(--muted); }
+
+.lede blockquote { margin: 26px 0 0; padding: 0 0 0 22px; border-left: 6px solid var(--buoy); }
+.lede blockquote p { margin: 0; font: 400 clamp(26px, 4.2vw, 46px)/1.14 var(--display); letter-spacing: -.012em; max-width: 21em; }
+.lede blockquote footer { margin-top: 12px; font: 400 14px/1 var(--data); color: var(--muted); }
+
+.gaps { list-style: none; margin: 30px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+.gaps li { border-top: 1px solid var(--rule); padding-top: 14px; }
+.gaps h3 { margin: 0; font: 600 23px/1.2 var(--display); }
+.gaps p { margin: 8px 0 0; font-size: 17px; color: var(--muted); }
+
+.rules { margin: 28px 0 0; padding: 0; list-style: none; counter-reset: rule; display: grid; gap: 0; }
+.rules li { counter-increment: rule; display: grid; grid-template-columns: 3.2em 1fr; align-items: baseline; padding: 16px 0; border-top: 1px solid var(--rule); font: 400 clamp(19px, 2.2vw, 24px)/1.3 var(--display); }
+.rules li::before { content: counter(rule); font: 500 15px/1 var(--data); color: var(--buoy-text); }
+.rules li:last-child { border-bottom: 1px solid var(--rule); }
+
+.with-drawing { display: grid; grid-template-columns: 1fr 240px; gap: 36px; align-items: start; margin-top: 26px; }
+.steps { margin: 0; padding: 0; list-style: none; counter-reset: step; max-width: 40em; }
+.steps li { counter-increment: step; position: relative; padding: 0 0 20px 46px; }
+.steps li::before { content: counter(step); position: absolute; left: 0; top: 2px; width: 28px; height: 28px; border-radius: 50%; background: var(--sea); color: var(--buoy); font: 500 14px/28px var(--data); text-align: center; }
+.steps li:not(:last-child)::after { content: ""; position: absolute; left: 13px; top: 34px; bottom: 4px; width: 2px; background: var(--rule); }
+/* A one-line drawing, used as a mask so that it takes the text colour, after the drawings of
+   picasso's site and of closed-source's tiles. */
+.drawing { display: block; aspect-ratio: 3 / 4; background: var(--ink); opacity: .82; -webkit-mask: var(--src) no-repeat center / contain; mask: var(--src) no-repeat center / contain; }
+.drawing.buoy { --src: url(drawings/buoy.svg); }
+
+.pull { margin: 24px 0 0; font: 600 clamp(28px, 4.6vw, 50px)/1.1 var(--display); letter-spacing: -.02em; max-width: 16em; }
+.properties { width: 100%; margin: 28px 0 0; border-collapse: collapse; font-size: 17px; }
+.properties th, .properties td { text-align: left; vertical-align: top; padding: 12px 18px 12px 0; border-top: 1px solid var(--rule); }
+.properties thead th { border-top: 0; font: 500 13px/1 var(--data); color: var(--muted); padding-bottom: 8px; }
+.properties tbody th { font: 600 19px/1.3 var(--display); white-space: nowrap; }
+
+.standing { list-style: none; margin: 26px 0 0; padding: 0; }
+.standing li { display: grid; grid-template-columns: 5.2em 15em 1fr; gap: 6px 18px; align-items: baseline; padding: 12px 0; border-top: 1px solid var(--rule); }
+.standing li:last-child { border-bottom: 1px solid var(--rule); }
+.standing .state { font: 500 13px/1 var(--data); }
+.standing b { font: 600 19px/1.3 var(--display); }
+.standing li > span:last-child { color: var(--muted); font-size: 17px; }
+.is-done .state { color: var(--ok); }
+.is-open .state { color: var(--open); }
+.is-none .state { color: var(--muted); }
+.is-none b { color: var(--muted); font-weight: 400; }
+
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 0; }
+.filters button { padding: 9px 14px; border: 1.5px solid var(--ink); background: transparent; color: var(--ink); font: 600 15px/1 var(--text); cursor: pointer; }
+.filters button[aria-pressed="true"] { background: var(--ink); color: var(--foam); }
+.prose.easy b { color: var(--buoy-text); }
+.contents { margin: 22px 0 0; padding: 0 0 0 1.4em; columns: 2; column-gap: 40px; max-width: 46em; font-size: 17px; color: var(--muted); }
+.contents li { break-inside: avoid; padding: 2px 0; }
+.preview { display: block; width: 100%; height: min(80vh, 900px); margin: 28px 0 0; border: 0; border-top: 3px solid var(--sea); background: #fff; }
+
+.records { list-style: none; margin: 22px 0 0; padding: 0; }
+.records li { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 18px; padding: 12px 0; border-top: 1px solid var(--rule); }
+.records li:last-child { border-bottom: 1px solid var(--rule); }
+.records a { font: 400 21px/1.3 var(--display); text-decoration: none; }
+.records a:hover { text-decoration: underline; text-decoration-color: var(--buoy); }
+.tags { display: flex; gap: 6px; }
+.tag { padding: 4px 8px; border: 1px solid var(--rule); font: 500 12px/1 var(--data); color: var(--muted); white-space: nowrap; }
+.tag.is-verified, .tag.is-closed { border-color: var(--ok); color: var(--ok); }
+.tag.is-partial, .tag.is-open, .tag.is-open-question, .tag.is-unverified { border-color: var(--open); color: var(--open); }
+.tag.is-approved { border-color: var(--sea); background: var(--sea); color: var(--buoy); }
+
+.stats { list-style: none; margin: 26px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.stats li { border-top: 1px solid var(--rule); padding-top: 12px; }
+.stats b { display: block; font: 500 44px/1 var(--data); letter-spacing: -.03em; }
+.stats span { display: block; margin-top: 8px; font-size: 16px; color: var(--muted); }
+
+.checks { list-style: none; margin: 22px 0 0; padding: 0; }
+.checks li { display: grid; grid-template-columns: 11em 1fr; gap: 6px 18px; align-items: center; padding: 12px 0; border-top: 1px solid var(--rule); font-size: 17px; color: var(--muted); }
+.checks li:last-child { border-bottom: 1px solid var(--rule); }
+.checks a { display: inline-flex; width: max-content; text-decoration: none; }
+.checks img { display: block; height: 20px; }
+
+.unknowns { margin: 20px 0 0; padding: 0 0 0 1.2em; max-width: 40em; }
+.unknowns li { padding: 3px 0; }
+
+.foot { margin-top: 0; background: var(--sea); color: rgba(234, 242, 245, .86); padding: 34px 0 44px; font-size: 16px; }
+.foot p { margin: 0 0 10px; max-width: 52em; }
+
+@media (max-width: 860px) {
+  .gaps { grid-template-columns: 1fr; gap: 0; margin-top: 22px; }
+  .gaps li { padding: 14px 0; }
+  .with-drawing { grid-template-columns: 1fr; }
+  .drawing { display: none; }
+  .standing li { grid-template-columns: 5.2em 1fr; }
+  .standing li > span:last-child { grid-column: 2; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .checks li { grid-template-columns: 1fr; }
+  .contents { columns: 1; }
+  .properties tbody th { white-space: normal; }
+}
+@media (max-width: 560px) {
+  body { font-size: 18px; }
+  .wrap { padding: 0 16px; }
+  .imprint { margin-bottom: 36px; }
+  .properties, .properties tbody, .properties tr, .properties th, .properties td { display: block; }
+  .properties thead { display: none; }
+  .properties tbody tr { border-top: 1px solid var(--rule); padding: 12px 0; }
+  .properties tbody th, .properties td { border: 0; padding: 2px 0; }
+  .properties td:nth-child(2)::before { content: "cheap: "; font: 500 13px/1 var(--data); color: var(--muted); }
+  .properties td:nth-child(3)::before { content: "reliable: "; font: 500 13px/1 var(--data); color: var(--muted); }
+}
+
+/* Whose work this is: the two logos, on the page's own pale ground so that each keeps its colours. */
+.stamps { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 34px; margin: 0; padding: 34px 0 0; }
+.stamps a { display: inline-flex; text-decoration: none; padding: 6px 10px; background: #F4F8F9; border-radius: 4px; }
+.stamps img { display: block; height: 36px; width: auto; }

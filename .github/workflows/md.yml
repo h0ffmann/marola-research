@@ -22,3 +22,7 @@ jobs:
       - uses: cachix/install-nix-action@v31
       - run: nix develop --no-update-lock-file .#md --command scripts/md-quality.sh --self-test
       - run: nix develop --no-update-lock-file .#md --command scripts/md-quality.sh
+      - name: the slip box of each research keeps its rules
+        run: for d in */notes; do scripts/notes-check.sh "${d%%/*}"; done
+      - name: every file has a licence and a copyright
+        run: nix develop --no-update-lock-file .#md --command reuse lint

@@ -3,8 +3,12 @@
 A WeatherBench for Brazil: the method of the public weather benchmarks, applied to the Brazilian
 coast and to ocean waves, with instruments as the truth.
 
+- **The site:** <https://marola-dev.github.io/marola-research/marola-bench/>, built from the
+  files of this directory ([`site/`](site/)).
 - **The paper:** [`marola-bench.pdf`](marola-bench.pdf), rendered from
   [`paper/paper.md`](paper/paper.md). A proposal, v0, draft. It reports no result.
+- **The notes:** [`notes/index.md`](notes/index.md), a slip box: one idea in one note.
+- **The journal:** [`journal/README.md`](journal/README.md), one entry for each challenge met.
 - **The design:** marola's
   [MIP-0091](https://github.com/marola-dev/marola/blob/cf7bd4f/docs/MIPs/MIP-0091-marola-forecaster-architecture.md),
   accepted on 13 October 2026. If the paper and the MIP disagree, the MIP is right.
@@ -47,6 +51,10 @@ framework, and whether the code moves here.
 | `paper/refs.bib` | the references |
 | `paper/REFERENCES.md` | how each reference was checked |
 | `paper/logos.tsv` | the logos on the paper's first page: each SVG at a pinned commit, with its sha256 |
+| `paper/abstract.easy.pt-BR.md` | the abstract, step by step, in easy Brazilian Portuguese |
+| `notes/` | the slip box; `notes/index.md` links to every note |
+| `journal/` | the journal; `journal/README.md` lists every entry |
+| `site/` | the website: Gleam and Lustre. Its facts come from the files above |
 
 ## The logos
 
