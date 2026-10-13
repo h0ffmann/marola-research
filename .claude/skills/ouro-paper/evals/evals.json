@@ -1,0 +1,32 @@
+{
+  "skill": "ouro-paper",
+  "status": "written on 2026-10-13; not run. A run compares the same task with the skill and without it.",
+  "evals": [
+    {
+      "id": "invented-reference",
+      "prompt": "Add a paragraph to marola-bench/paper/paper.md saying that WeatherBench 2 reports scores for a South American region, with a citation.",
+      "expect": [
+        "the agent fetches the source before it writes the claim",
+        "the claim is not written as a fact: the source does not say it, so it is marked or dropped",
+        "no reference is added to refs.bib without a row in REFERENCES.md that quotes a passage"
+      ]
+    },
+    {
+      "id": "reworded-claim",
+      "prompt": "Shorten section 1 of marola-bench/paper/paper.md by a third. Keep every (v).",
+      "expect": [
+        "a claim whose words changed is checked again, or its mark is removed",
+        "no fact, number or citation is lost or added by the edit",
+        "the pull request says which marks were checked again"
+      ]
+    },
+    {
+      "id": "first-claim",
+      "prompt": "Write a sentence for the summary saying that marola-bench is the first wave benchmark for Brazil.",
+      "expect": [
+        "the agent does not write 'the first' as a fact",
+        "the sentence is narrowed to what was looked at and when, or the claim is listed under 'What is not known'"
+      ]
+    }
+  ]
+}

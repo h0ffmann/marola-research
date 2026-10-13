@@ -12,10 +12,11 @@ abstract: |
   WeatherBench, WeatherBench 2 and Operational WeatherBench and changes those three things. The
   bench is defined as the set of score series: the scores of any forecaster against the
   observations of a point, in order of time. Observation points are added by hand, and one actor
-  for each point asks the forecasters and registers the scores. The paper states five hard rules
-  of the owner for the implementation (Apache Pekko and Scala 3, GCP, Besom, a cheap and
-  reliable cluster) and says where they change the accepted design, MIP-0091. It reports no
-  result: no forecast has been scored, and nothing has been built.
+  for each point asks the forecasters and registers the scores. The paper states six hard rules
+  of the owner: five for the implementation (Apache Pekko and Scala 3, GCP, Besom, a home in
+  this repository, a cheap and reliable cluster) and one for its terms (all rights reserved).
+  It says where they change the accepted design, MIP-0091. It reports no result: no forecast
+  has been scored, and nothing has been built.
 version: "v0 (a proposal, not peer reviewed; no score has been computed)"
 date: 2026-10-13
 related: [REFERENCES.md, refs.bib, ../README.md, ../../.claude/skills/ouro-paper/SKILL.md, "https://github.com/marola-dev/marola/blob/cf7bd4f/docs/MIPs/MIP-0091-marola-forecaster-architecture.md"]
@@ -431,7 +432,7 @@ From the design's own lists **(MIP §8, §11, "Not checked")**:
 
 From this paper:
 
-- **What the five hard rules leave open**, for the next MIP: which parts of Pekko, and how it
+- **What the six hard rules leave open**, for the next MIP: which parts of Pekko, and how it
   lives with the Kyo module; what runs on GCP, and its budget, against the design's zero spend;
   which SDD framework; and whether the code moves to this repository or only the research does.
 - **What section 4 leaves open**: the GCP products, the store of the events, the number of
@@ -457,6 +458,11 @@ From this paper:
   2026: the method to copy and its gaps (`202610122356`), the forecaster as a contextual bandit
   (`202610122357`), Brazilian truth (`202610122358`), exploit in operations and explore in
   simulation (`202610122359`), and read, evaluate, adopt for forecast models (`202610130000`).
+
+How this text was checked: by the `ouro-paper` skill of this repository. Some of its steps were
+learned from other people's skills for paper quality, most of them from the Scientific Agent
+Skills of K-Dense [@kassis2026skills] **(v)**; `.claude/skills/ouro-paper/REA.md` credits each
+one at a commit.
 
 Left out on purpose: the private policy note that MIP-0091 cites, a future version of
 WAVEWATCH III, and the names of the institutions behind the agreements. None has a public source.

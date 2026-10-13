@@ -26,6 +26,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v31
+      - name: the skills that are used by link are still what the lock names
+        run: scripts/skills.sh check
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
       - run: nix develop --no-update-lock-file .#md --command scripts/md-quality.sh --online
         env:
           GITHUB_TOKEN: ${{ github.token }}

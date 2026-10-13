@@ -77,6 +77,11 @@ citation research *args:
 doi research:
     scripts/doi-check.sh {{research}}
 
+# Other people's skills, used by link: `just skills list`, `just skills check` (the pins are
+# still what the lock names), `just skills fetch` (bring them to .claude/skills/.vendor/, ignored).
+skills *args:
+    scripts/skills.sh {{args}}
+
 # The slip box of a research keeps its rules (NOTES.md).
 notes research:
     scripts/notes-check.sh {{research}}

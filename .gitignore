@@ -7,3 +7,5 @@ result-*
 */site/dist/
 */site/src/*/content.gleam
 tools/content/build/
+# Other people's skills, fetched to this machine by `just skills fetch`. Never committed.
+.claude/skills/.vendor/
