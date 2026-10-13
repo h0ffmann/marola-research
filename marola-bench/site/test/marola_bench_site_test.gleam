@@ -15,7 +15,7 @@ pub fn the_page_tells_the_research_test() {
   assert string.contains(html, "href=\"paper.pdf\"")
   // The owner's sentence, and his rules, come from the research's files.
   assert content.bench != ""
-  assert list.length(content.rules) == 5
+  assert list.length(content.rules) == 6
   assert list.all(content.rules, fn(r) { string.contains(html, r) })
   assert content.references > 0
   assert content.references
@@ -61,4 +61,10 @@ pub fn the_logos_load_from_their_owners_test() {
     string.starts_with(l.src, "https://raw.githubusercontent.com/")
     && string.contains(html, "src=\"" <> l.src <> "\"")
   })
+}
+
+pub fn the_page_states_its_terms_test() {
+  let html = app.initial() |> app.view |> element.to_string
+  assert string.contains(html, "All rights reserved")
+  assert string.contains(html, "/blob/main/REUSE.md")
 }

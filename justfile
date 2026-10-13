@@ -62,6 +62,11 @@ check research:
 md-quality *args:
     {{nix}} .#md --command scripts/md-quality.sh {{args}}
 
+# Cut the release of ONE research: tag `<research>-vX.Y.Z` and push it. Only the owner, or an
+# agent he asked for that release by name: a DOI cannot be deleted. Add --dry-run to check first.
+release research version *args:
+    scripts/release.sh {{research}} {{version}} {{args}}
+
 # The slip box of a research keeps its rules (NOTES.md).
 notes research:
     scripts/notes-check.sh {{research}}

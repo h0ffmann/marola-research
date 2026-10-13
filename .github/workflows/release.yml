@@ -1,0 +1,49 @@
+# release — a pushed tag `<research>-vX.Y.Z` (`just release <research> X.Y.Z`) becomes a published
+# GitHub release of that ONE research, with its PDF attached. Zenodo's webhook then makes the
+# record from `.zenodo.json` and mints the DOI. No secret: the webhook is Zenodo's, switched on
+# one time by the owner at zenodo.org for this repository.
+# The release is of one research. Zenodo's record still holds the archive of the whole
+# repository at the tag: that is what its webhook takes. `.zenodo.json` makes the record closed,
+# so that archive is not shared there.
+name: release
+
+on:
+  push:
+    tags: ["*-v[0-9]*.[0-9]*.[0-9]*"]
+
+permissions: {}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: tag
+        name: the tag names a research, a version, and a commit of main
+        run: |
+          [[ "$GITHUB_REF_NAME" =~ ^(.+)-v((0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*))$ ]]
+          research="${BASH_REMATCH[1]}"
+          [ -f "$research/paper/paper.md" ]
+          git merge-base --is-ancestor "$GITHUB_SHA" origin/main
+          cmp .zenodo.json "$research/zenodo.json"
+          echo "research=$research" >> "$GITHUB_OUTPUT"
+          echo "version=${BASH_REMATCH[2]}" >> "$GITHUB_OUTPUT"
+      - uses: cachix/install-nix-action@v31
+      - name: the references, the build, and the committed PDF
+        run: |
+          nix develop --no-update-lock-file --command just refs ${{ steps.tag.outputs.research }}
+          nix develop --no-update-lock-file --command just _current ${{ steps.tag.outputs.research }}
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          RESEARCH: ${{ steps.tag.outputs.research }}
+          VERSION: ${{ steps.tag.outputs.version }}
+        run: |
+          cp "$RESEARCH/$RESEARCH.pdf" "$RESEARCH-v$VERSION.pdf"
+          gh release create "$GITHUB_REF_NAME" "$RESEARCH-v$VERSION.pdf" --repo "$GITHUB_REPOSITORY" --verify-tag \
+            --title "$RESEARCH v$VERSION" \
+            --notes "The release of one research, $RESEARCH. All rights reserved (REUSE.md): read it and cite it; do not copy or share it without the author's acknowledgement. Its DOI is in $RESEARCH/README.md a few minutes after this release."

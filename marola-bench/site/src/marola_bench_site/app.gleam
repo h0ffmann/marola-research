@@ -249,7 +249,7 @@ fn rules_section() -> Element(msg) {
     ),
     html.p([attribute.class("prose")], [
       html.text(
-        "The owner's rules. They are not open to an agent's choice. Four of them change the design that was accepted the same day, and the paper says where; a new design document must settle the rest before code is written.",
+        "The owner's rules. They are not open to an agent's choice. Five of them change the design that was accepted the same day, and the paper says where; a new design document must settle the rest before code is written.",
       ),
     ]),
     html.ol(
@@ -631,8 +631,10 @@ fn footer() -> Element(msg) {
           content.repo <> "/commit/" <> content.revision,
           "commit " <> content.revision,
         ),
-        html.text(". Texts under CC BY 4.0, code under MIT ("),
-        external(content.repo <> "/blob/main/REUSE.toml", "REUSE.toml"),
+        html.text(
+          ". All rights reserved: read it and cite it; do not copy it or share it without the author's acknowledgement (",
+        ),
+        external(content.repo <> "/blob/main/REUSE.md", "REUSE.md"),
         html.text(")."),
       ]),
       html.p([], [

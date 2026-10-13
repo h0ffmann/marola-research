@@ -75,12 +75,16 @@ and the logo of Ouroboric are trademarks of that project and are not licensed he
 
 ## Not here yet
 
-A release, a DOI, and any code of a research.
+Any code of a research.
 
 ## Licence
 
-One file says it for every file, with no header in any file:
-[`REUSE.toml`](REUSE.toml), in the pattern of the ouroboric-dev repositories. Texts (the papers,
-their notes and journals, these pages) are CC BY 4.0. Code (what builds, checks and serves the
-texts) is MIT, the licence this repository started with ([`LICENSE`](LICENSE)). The licence
-texts are in [`LICENSES/`](LICENSES/). `just reuse` checks it.
+**A research is not open because this repository is public.** marola-bench is **all rights
+reserved**: read it and cite it; do not copy it or share it without the author's
+acknowledgement. [`REUSE.md`](REUSE.md) says who may work on it and what an agent must do, and
+[`TRADEMARKS.md`](TRADEMARKS.md) has the names and logos.
+
+At the root, the code that builds and checks a research is MIT ([`LICENSE`](LICENSE)) and the
+texts that explain the repository are CC BY 4.0. One file says it for every file, with no header
+in any file: [`REUSE.toml`](REUSE.toml), in the pattern of the ouroboric-dev repositories. The
+licence texts are in [`LICENSES/`](LICENSES/). `just reuse` checks it.

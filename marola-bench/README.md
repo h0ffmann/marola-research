@@ -26,6 +26,9 @@ The owner's rules (Hoffmann, 13 October 2026). They are not open to an agent's c
    here.
 5. The deployment of the Pekko cluster is **cheap** and **reliable**. Both are hard
    requirements, and so is its infrastructure on GCP.
+6. marola-bench is **all rights reserved**, and the credit belongs to Matheus Hoffmann. No
+   sharing outside marola-dev and ouroboric-dev without his acknowledgement. Whoever uses it
+   cites it.
 
 ## The bench, in the owner's words
 
@@ -37,10 +40,25 @@ is the final goal.
   forecaster.
 - The design principles for a cheap and reliable cluster are in section 4.4 of the paper.
 
-Rules 1, 2, 4 and 5 change the accepted design, which has Kyo, zero cloud spend, modules in
-marola-app and a cycle on GitHub Actions. The paper's section "Hard rules" says what each rule meets. A MIP must settle the
+Rules 1, 2, 4, 5 and 6 change the accepted design, which has Kyo, zero cloud spend, modules in
+marola-app, a cycle on GitHub Actions and a public chain under CC BY 4.0. The paper's section "Hard rules" says what each rule meets. A MIP must settle the
 rest before code is written: which parts of Pekko, what runs on GCP and its budget, which SDD
 framework, and whether the code moves here.
+
+## Terms
+
+All rights reserved, © 2026 Matheus Hoffmann. You may read marola-bench and cite it. You may not
+copy it, share it, adapt it or use it as source material without his written acknowledgement.
+The members of marola-dev and ouroboric-dev may work on it, inside those organisations.
+[`REUSE.md`](../REUSE.md) has the terms and the hard rule for agents;
+[`TRADEMARKS.md`](../TRADEMARKS.md) has the names and logos.
+
+## Cite
+
+> Hoffmann, M. (2026). *marola-bench: a proposal for a WeatherBench for Brazil*. Zenodo.
+
+No DOI yet: the first release has not been cut. The DOI is written here by the pull request that
+follows the release.
 
 ## Files
 
@@ -50,6 +68,7 @@ framework, and whether the code moves here.
 | `paper/paper.md` | the text, with a mark on every claim |
 | `paper/refs.bib` | the references |
 | `paper/REFERENCES.md` | how each reference was checked |
+| `zenodo.json` | the metadata of the Zenodo record; the root `.zenodo.json` is a copy of it |
 | `paper/logos.tsv` | the logos on the paper's first page: each SVG at a pinned commit, with its sha256 |
 | `paper/abstract.easy.pt-BR.md` | the abstract, step by step, in easy Brazilian Portuguese |
 | `notes/` | the slip box; `notes/index.md` links to every note |
