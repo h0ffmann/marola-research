@@ -35,10 +35,11 @@ _paper research out:
       -o "$OLDPWD/{{out}}"
     @echo "paper: {{out}}"
 
-# Every entry of refs.bib has a row in REFERENCES.md.
+# Every entry of refs.bib has a row in REFERENCES.md, and the paper cites it.
 refs research:
     for k in $(grep -oE '^@[a-z]+\{[^,]+' "{{research}}/paper/refs.bib" | cut -d'{' -f2); do grep -q "\`$k\`" "{{research}}/paper/REFERENCES.md" || { echo "refs: $k has no row in REFERENCES.md" >&2; exit 1; }; done
-    @echo "refs: every entry of {{research}}/paper/refs.bib has a row"
+    for k in $(grep -oE '^@[a-z]+\{[^,]+' "{{research}}/paper/refs.bib" | cut -d'{' -f2); do grep -q "@$k\b" "{{research}}/paper/paper.md" || { echo "refs: $k is in refs.bib and the paper does not cite it" >&2; exit 1; }; done
+    @echo "refs: every entry of {{research}}/paper/refs.bib has a row and is cited"
 
 # The committed PDF is the one its text makes: render to build/ and compare the words of the two.
 current research:

@@ -22,8 +22,9 @@ style: research
 > projects. They say where this work is from and which way of working it follows. They do not
 > say that either project endorses this text.
 >
-> **How to read the marks.** **(v)** means that the claim was checked while this paper was
-> written, and [`REFERENCES.md`](REFERENCES.md) says how. **(MIP §n)** means that the claim is
+> **How to read the marks.** **(v)** means that the claim was checked against the text of its
+> source while this paper was written. [`REFERENCES.md`](REFERENCES.md) gives the passage and
+> says how much of the source was read: the full text, or its abstract. **(MIP §n)** means that the claim is
 > the design's, from that section of MIP-0091; the MIP keeps its own list of what it checked and
 > what it did not. **⚠** means not checked by anyone yet.
 
@@ -54,7 +55,9 @@ next MIP must settle.
 - Pekko is new. That build uses Kyo 1.0.0-RC7 and has no Pekko dependency **(v)**, and MIP-0091
   describes the forecaster on "the same toolchain (Scala 3, Kyo RC7, JDK 25)" **(MIP §4.4)**.
 - Apache Pekko is a toolkit for "highly concurrent, distributed, and resilient message-driven
-  applications using Java/Scala", under Apache-2.0 [@pekko] **(v)**.
+  applications using Java/Scala", under Apache-2.0 [@pekko] **(v)**. Its current release is
+  1.7.1, and its documentation says: "Pekko has support for Scala 3. Pekko is built with Scala
+  3.3 LTS version" **(v)**. So the two halves of the rule fit each other.
 - Not said by the rule, and not guessed here: which parts of Pekko (actors, streams, cluster),
   and how Pekko and the Kyo module live together.
 
@@ -100,18 +103,22 @@ next MIP must settle.
 
 ## 1. Summary
 
-Public benchmarks made weather forecast models comparable. WeatherBench is a benchmark data set
-for data-driven weather forecasting [@rasp2020weatherbench] **(v, title only)**. WeatherBench 2
-is a benchmark for the next generation of data-driven global models [@rasp2024weatherbench2]
-**(v, title only)**. Operational WeatherBench scores operational models as they run
-[@brightband2026owb] **(v)**.
+Public benchmarks made weather forecast models comparable. WeatherBench is "a benchmark dataset
+for data-driven medium-range weather forecasting", with evaluation metrics and baseline scores
+[@rasp2020weatherbench] **(v)**. WeatherBench 2 adds an open evaluation framework, ground truth
+and baseline data, and a website that is updated with the latest metrics
+[@rasp2024weatherbench2] **(v)**. Operational WeatherBench scores operational models as they
+run [@brightband2026owb] **(v)**.
 
 For a person on a Brazilian beach, three things are missing in them **(MIP §4.1)**:
 
-1. **No region is Brazil.** Operational WeatherBench shows the global mean, the tropics, the two
-   hemispheres, North America and Europe **(v)**.
-2. **No score is for waves.** Its variables are of the atmosphere **(v)**. marola forecasts sea
-   conditions [@marola2026].
+1. **No region is Brazil.** The selector of Operational WeatherBench "offers the global mean
+   plus the tropics, the northern and southern hemispheres, North America, and Europe"
+   **(v)**. The page says that scores are computed for more regions than it shows; neither
+   "South America" nor "Brazil" is on it **(v)**.
+2. **No score is for waves.** The methodology page names only variables of the atmosphere:
+   geopotential, temperature, wind and precipitation **(v)**. marola forecasts sea conditions
+   [@marola2026].
 3. **No truth is an instrument.** Each model is scored against its own analysis **(v)**. Over an
    ocean with few observations, that favours agreement with the analysis, not with the sea
    **(MIP §4.2)**.
@@ -127,9 +134,12 @@ WeatherBench's methodology page **(v)**:
 - **One scorer.** Every model is scored by the same code. Operational WeatherBench uses Google
   Research's WeatherBench-X, which is open under Apache-2.0 [@weatherbenchx] **(v)**.
 - **A truth that is stated one time.** There, each model against its own analysis, and
-  precipitation against ERA5 [@hersbach2020era5] **(v)**.
+  precipitation always against ERA5 **(v)**. ERA5 is ECMWF's reanalysis for the Copernicus
+  Climate Change Service, a record of "the global atmosphere, land surface and ocean waves"
+  [@hersbach2020era5] **(v)**: it has waves, which matters for section 9.
 - **Fixed leads and fixed regions.**
-- **A baseline that is always on the chart**: a climatology **(v)**.
+- **A baseline with no skill**: a climatology "is scored as a reference 'no-skill' curve"
+  **(v)**.
 - **A ranking rule that is written down.**
 
 It also copies the licence: the dashboard and its scores are CC BY 4.0, and third-party data
@@ -147,9 +157,10 @@ the Brazilian coast. Each row of truth carries its instrument, its averaging, it
 and its licence tier. A missing observation is a row that says "missing"; it is never replaced by
 a model's value **(MIP R4)**.
 
-Directional wave buoys have been operated off the southern Brazilian coast
-[@pereira2017buoys] **(v, title only)**. They are few: the design counts at most about nine
-buoys of the national programme at the same time **(MIP §4.2)**. The format of their files,
+There is a network of buoys along the Brazilian coast with meteorological and oceanographic
+sensors. In 2017 a paper counted "ten currently operational buoys" and analysed the waves at
+three of them, in the southern part [@pereira2017buoys] **(v)**. They are few: the design
+counts at most about nine buoys of the national programme at the same time **(MIP §4.2)**. The format of their files,
 their averaging and their latency are **⚠ (MIP, "Not checked")**.
 
 ### 3.2 A licence tier on every row
@@ -172,14 +183,17 @@ climatology floor. Wind rows and wave rows stay apart **(MIP R5)**.
 
 ### 3.5 Scores that the literature already defines
 
-- A fair continuous ranked probability score with ensembles of 16 members **(MIP R2)**; the CRPS
-  is a proper scoring rule [@gneiting2007scoring] **(v, title only)**.
+- A fair continuous ranked probability score (CRPS) with ensembles of 16 members
+  **(MIP R2)**. The CRPS is a proper scoring rule [@gneiting2007scoring] **(v)**. For an
+  ensemble, the usual CRPS is "unfair" and an adjusted version is "fair" [@ferro2014fair]
+  **(v)**.
 - For waves, a threshold-weighted CRPS above 2.5 m, because the high sea is the one that hurts
-  **(MIP R5)**.
+  **(MIP R5)**. A weight on the score "emphasizes regions of interest ... while retaining
+  propriety" [@gneiting2011weighted] **(v)**.
 - Always a climatology floor, and the reward is skill relative to it. A cell with no floor
   publishes no reward **(MIP R6)**.
-- For 24-hour precipitation, Operational WeatherBench uses SEEPS **(v)**
-  [@rodwell2010seeps] **(v, title only)**.
+- For 24-hour precipitation, Operational WeatherBench uses SEEPS **(v)**, a score "for
+  monitoring precipitation forecasts" [@rodwell2010seeps] **(v)**.
 
 ### 3.6 One fixed, versioned, public protocol
 
@@ -225,7 +239,8 @@ Two things follow:
 
 An observation point is added, changed and removed by a person, through a CRUD API (create,
 read, update, delete) that is specified in Apache Pekko and Scala. There is no automatic
-discovery of points.
+discovery of points. Pekko has a module for it: Pekko HTTP is "a full server- and client-side
+HTTP stack on top of pekko-actor and pekko-stream" [@pekkohttp] **(v)**.
 
 By hand, because a point is not only a position. It has an instrument, an averaging, a quality
 flag and a licence tier **(MIP R4)**, and a person must read the terms before a point's data is
@@ -259,9 +274,9 @@ requirements.
 | Property, in the manifesto's words | What it means here | Cheap | Reliable |
 |---|---|---|---|
 | **Message driven**: "asynchronous message-passing to establish a boundary between components" | an actor for each point; an actor shares no state; a provider is asked by a message with a time limit | an actor that waits uses no processor | one failed point or one failed provider does not stop the others |
-| **Resilient**: "stays responsive in the face of failure" | an actor that fails is restarted by its supervisor [@pekkofault]; an actor's state is the events it stored [@pekkopersistence], so it can start again on another node | a node may be lost, so capacity that can be taken away is usable | no score is lost with a node |
-| **Elastic**: "stays responsive under varying workload" | an actor with nothing to do is stopped and started again when needed. Pekko calls this passivation: "you may stop entities that are not used to reduce memory consumption" [@pekkosharding] **(v)** | a point acts a few times a day and is idle the rest; memory follows the work, not the number of points | adding points does not need a larger design |
-| **Responsive**: "responds in a timely manner if at all possible" | back-pressure [@pekkostreams]: a slow provider slows its own stream and fills no queue | no capacity is kept for a peak | an answer that does not come in time is a row that says "missing", never a guess **(MIP R4)** |
+| **Resilient**: "stays responsive in the face of failure" | an actor that fails is restarted when a supervision strategy says so; with none, a typed actor is stopped [@pekkofault] **(v)**. An actor's state is the events it stored: it "is recovered by replaying the stored events", also when it is "migrated within a cluster" [@pekkopersistence] **(v)** | a node may be lost, so capacity that can be taken away is usable | no score is lost with a node |
+| **Elastic**: "stays responsive under varying workload" | an actor with nothing to do is stopped and started again when needed. Pekko calls this passivation: "you may stop entities that are not used to reduce memory consumption"; by default an idle entity is passivated after 2 minutes [@pekkosharding] **(v)** | a point acts a few times a day and is idle the rest; memory follows the work, not the number of points | adding points does not need a larger design |
+| **Responsive**: "responds in a timely manner if at all possible" | back-pressure: a source "will never emit more elements than the received total demand", which slows the producer down to the speed of the consumer, with a bounded buffer [@pekkostreams] **(v)** | no capacity is kept for a peak | an answer that does not come in time is a row that says "missing", never a guess **(MIP R4)** |
 
 Six rules follow from them. They are proposals for the next MIP, not facts.
 
@@ -277,7 +292,9 @@ Six rules follow from them. They are proposals for the next MIP, not facts.
    registered two times is one score.
 4. **The smallest cluster that survives one loss.** Its size is a value of the protocol, like
    the budget **(MIP R3, R17)**, and it is written before the deployment. A cluster needs a rule
-   for the case in which its nodes cannot see each other; Pekko has one [@pekkosbr].
+   for the case in which its nodes cannot see each other, so that both sides "take the same
+   decision about which part will keep running". Pekko's Split Brain Resolver has five: keep
+   majority (the default), static quorum, keep oldest, down all, and lease [@pekkosbr] **(v)**.
 5. **The budget has a switch.** The design already has a kill switch that returns every cell to
    the fallback **(MIP R10)**. The same idea for cost: above the budget, the cluster does less
    (fewer providers, longer intervals) before it costs more, and it says so on the bench.
@@ -298,10 +315,15 @@ algorithm **(MIP R8)**:
 
 - **Fetched arms** are forecasts that others publish. All of them are scored every cycle, so
   the loss of each is always seen. They are experts with full information, and the rule is
-  Hedge.
+  Hedge: in each round that algorithm receives the loss of every strategy
+  [@freund1997hedge] **(v)**.
 - **Computed arms** are wave runs that cost compute, such as runs of the WW3 GPU port
-  [@hoffmann2026ww3gpu]. Only the runs that were made are seen. They are a bandit with a budget
-  [@li2010contextual] **(v, title only)**, and the rule is Thompson sampling with a knapsack.
+  [@hoffmann2026ww3gpu]. Only the runs that were made are seen: "no feedback ... is observed
+  for unchosen arms", which is what makes a problem a bandit [@li2010contextual] **(v)**. The
+  rule is Thompson sampling, which draws an estimate for each action from the posterior and
+  takes the action with the largest [@russo2018thompson] **(v)**, with a knapsack: a bandit in
+  which the learner is "constrained by one or more supply (or budget) limits"
+  [@badanidiyuru2018knapsacks] **(v)**.
 
 The design is exact on one point: never a bandit over arms whose loss is observed in all cases
 **(MIP R8)**. The owner's first note called the whole thing a contextual bandit (section 10);
@@ -316,7 +338,8 @@ every feature of it is dated before the forecast was issued **(MIP R9)**.
   regression tests passed and recorded; for the GPU port that means bit for bit **(MIP R15)**.
 - **The quoted model changes slowly.** A new model replaces the incumbent only when the 95%
   interval of a paired block bootstrap is above zero, on two consecutive weekly runs
-  **(MIP R10)**.
+  **(MIP R10)**. A block bootstrap resamples blocks of observations, and does not treat a time
+  series as independent values [@kunsch1989bootstrap] **(v)**.
 - **No live exploration.** A swimmer sees only a model that passed its gate. Exploration changes
   which computed runs are made, never what is shown **(MIP R11)**.
 - **Safety reads nothing from the forecaster.** The swimming score and the warning for a
@@ -334,8 +357,9 @@ should trust [@hoffmann2026closedsource]. A benchmark is that argument at a smal
 scoreboard with a hidden scorer asks for trust. So the design has a public chain **(MIP R20)**:
 
 - the scorecards are CC BY 4.0, with each source's terms kept;
-- each version of the protocol gets a dated data set on Zenodo, with a permanent identifier, as
-  the software citation principles ask [@smith2016software] **(v)**;
+- each version of the protocol gets a dated data set on Zenodo, with a permanent identifier.
+  The software citation principles ask for an identifier that is "globally unique" and that
+  persists "even beyond the lifespan of the software" [@smith2016software] **(v)**;
 - the reports and their sources are in this repository;
 - the toolchain is pinned [@hoffmann2026picasso], so a score can be made again.
 
@@ -379,8 +403,12 @@ From this paper:
   this paper under the name "marola-bench". Which one the public sees is his decision.
 - **The licence of this text.** This repository is MIT. The design wants CC BY 4.0 for what it
   publishes **(MIP R20)**. That is the owner's decision too.
-- The claims marked "title only": the record of the paper was read, and its text was not. No
-  claim here depends on a detail of one.
+- **How deep the reading was.** Each "(v)" was checked against a passage of its source, but for
+  six of the journal papers that passage is the abstract, and for one (the buoys) the abstract
+  on a university's record, because the publisher's page asked for a login. `REFERENCES.md`
+  says which. Whether that paper names the national buoy programme is not known.
+- **An analysis as a second truth.** ERA5 has ocean waves (section 2). Whether it is good enough
+  on this coast to score against where there is no buoy is not known.
 
 ## 10. Where the thesis comes from
 
